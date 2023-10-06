@@ -1,0 +1,22 @@
+:root {
+  --bg-primary: #0F0039; /* Navbar and page background color */
+
+}
+
+.nb-background-color { /* navbar background color */
+  background-color: var(--bg-primary);
+}
+
+.nbMenuItem {
+  font-size: 1.125rem;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.hero {
+  background-color: var(--bg-primary);
+}
+
+.description {
+  width: 75%;
+}
