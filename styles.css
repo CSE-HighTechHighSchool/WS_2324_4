@@ -1,22 +1,66 @@
-:root {
-  --bg-primary: #0F0039; /* Navbar and page background color */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700;800&display=swap');
 
+/* Declare variables (for colors) */
+:root {
+  --bg-primary: #0F0039; /* Page background color */
+  --bg-nav: #0f0039b2;
 }
 
-.nb-background-color { /* navbar background color */
-  background-color: var(--bg-primary);
+/* Reset stypes */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Set default font-family */
+body {
+  font-family: Manrope, sans-serif;
+}
+
+/* Navbar background color */
+.nb-background-color {
+  background-color: var(--bg-nav);
+  backdrop-filter: blur(20px);
 }
 
 .nbMenuItem {
-  font-size: 1.125rem;
+  font-size: 1.1rem;
   margin-left: 10px;
-  margin-right: 10px;
 }
 
+.nav-btn {
+  margin-left: 20px;
+}
+
+.signup {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  color: black;
+  padding: 5px 15px;
+  border-radius: 18px;
+}
+
+/* Hero section in the landing page */
 .hero {
   background-color: var(--bg-primary);
+  padding: 8rem 0 6rem;
+}
+
+/* Text gradient and font size */
+.hero h1 {
+  font-size: 4rem;
+  font-weight: 800;
+  background: linear-gradient(to right, #FA00FF 0%, #4A52FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -2px;
 }
 
 .description {
-  width: 75%;
+  width: 100%;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.6);
 }
