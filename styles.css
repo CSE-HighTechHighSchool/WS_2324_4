@@ -48,6 +48,10 @@ body {
   padding: 8rem 0 6rem;
 }
 
+.hero-color{
+  background-color: var(--bg-primary);
+}
+
 /* Text gradient and font size */
 .hero h1 {
   font-size: 4rem;
@@ -63,4 +67,12 @@ body {
   width: 100%;
   font-size: 1.05rem;
   color: rgba(255, 255, 255, 0.6);
+}
+
+.city{
+  background-image: url('img/city.jpg');
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: bottom;
 }
