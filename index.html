@@ -15,13 +15,13 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
     />
-    <link rel="stylesheet" href="styles.css" />
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
       defer
     ></script>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <nav class="navbar-color navbar fixed-top navbar-expand-lg navbar-dark nb-background-color">
@@ -75,14 +75,21 @@
     <section class="hero"> <!-- hero = custom class for background and padding -->
       <div class="container">
         <div class="row">
-          <div class="col-sm-7 text-light">
+          <div class="col-sm-10 col-lg-6 text-light">
             <!-- hero-text = custom class for text gradient and font size -->
-            <h1 class="mb-3">Revolutionizing the way you study.</h1>
-            <p class="description">
+            <h1 class="mb-4">Revolutionizing the way you study.</h1>
+            <p class="description mb-4">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt
               maxime accusantium, facilis pariatur velit consectetur similique
               autem porro necessitatibus.
             </p>
+            <div class="d-flex">
+              <button class="btn btn-light rounded-pill me-2">Sign Up</button>
+              <button class="btn ghost-btn rounded-pill">Learn more</button> <!-- ghost-btn = custom class for button w/ transparent background -->
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <!-- <img class="img-fluid rounded-4" src="img/studying.jpg" alt="A student studying"> -->
           </div>
         </div>
       </div>

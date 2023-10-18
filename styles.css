@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,700&display=swap');
 
 /* Declare variables (for colors) */
 :root {
   --bg-primary: #0F0039; /* Page background color */
   --bg-nav: #0f0039b2;
+  --bg-accent: white;
 }
 
 /* Reset stypes */
@@ -15,7 +16,7 @@
 
 /* Set default font-family */
 body {
-  font-family: Manrope, sans-serif;
+  font-family: "DM Sans", sans-serif !important;
 }
 
 /* Navbar background color */
@@ -54,13 +55,12 @@ body {
 
 /* Text gradient and font size */
 .hero h1 {
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: 800;
   background: linear-gradient(to right, #FA00FF 0%, #4A52FF 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: -2px;
 }
 
 .description {
@@ -76,3 +76,16 @@ body {
   background-attachment: fixed;
   background-position: bottom;
 }
+
+
+/* Overriding Bootstrap styles */
+.container {
+  padding: 0 1rem;
+}
+
+.ghost-btn {
+  padding: 0.375rem 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* .ghost-btn */
