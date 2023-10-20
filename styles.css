@@ -46,11 +46,19 @@ body {
 /* Hero section in the landing page */
 .hero {
   background-color: var(--bg-primary);
-  padding: 8rem 0 6rem;
+  padding: 8rem 0 8rem;
 }
 
 .hero-color{
   background-color: var(--bg-primary);
+}
+
+#mountain {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  max-width:100%;
+  z-index: 1;
 }
 
 /* Text gradient and font size */
@@ -88,4 +96,12 @@ body {
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* .ghost-btn */
+/* Value proposition section */
+.val-prop {
+  background: #C5B5EF;
+  padding: 6rem 0 4rem;
+}
+
+.val-prop h1 {
+  letter-spacing: 1.5px;
+}
