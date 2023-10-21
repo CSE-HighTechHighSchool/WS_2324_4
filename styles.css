@@ -4,6 +4,8 @@
 :root {
   --bg-primary: #0F0039; /* Page background color */
   --bg-nav: #0f0039b2;
+  --button: #7a20bf;
+  --button-hover: #9938e3;
 }
 
 /* Reset stypes */
@@ -21,7 +23,7 @@ body {
 /* Navbar background color */
 .nb-background-color {
   background-color: var(--bg-nav);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(8px);
 }
 
 .nbMenuItem {
@@ -48,10 +50,6 @@ body {
   padding: 8rem 0 6rem;
 }
 
-.hero-color{
-  background-color: var(--bg-primary);
-}
-
 /* Text gradient and font size */
 .hero h1 {
   font-size: 4rem;
@@ -69,10 +67,91 @@ body {
   color: rgba(255, 255, 255, 0.6);
 }
 
-.city{
-  background-image: url('img/city.jpg');
+.lofi_anime{
+  background-image: url('img/background/lofi_anime.jpg');
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: bottom;
+}
+
+.image-credit {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  font-size: 12px;
+  color: #b464cc; /* Change this to the desired text color */
+  text-decoration: none;
+}
+
+.audio-player-container {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--bg-nav);
+  padding:5px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.control-btn {
+  background-color: var(--button);
+  color: #fff; /* Button text color */
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.control-btn:hover {
+  background-color: var(--button-hover);
+}
+
+.song-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(0px);
+  transition: opacity 0.3s 0.2s, transform 0.3s 0.2s;
+  position: absolute;
+  bottom: 40px;
+}
+
+#song{
+  color:white;
+  font-size:10px;
+}
+#artist{
+  color:rgb(147, 147, 147);
+  font-size:9px;
+}
+
+.audio-player-container:hover .song-info-container {
+  opacity: 1;
+  transform: translateY(-10px);
+}
+
+
+.slider {
+  width: 100%;
+  accent-color:var(--button);
+}
+
+#changeThemeBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  /* Additional styles for the button (optional) */
+  background-color: #007bff; /* Button background color */
+  color: #ffffff; /* Button text color */
+  border: none; /* Remove button border */
+  padding: 10px 20px; /* Button padding */
+  cursor: pointer; /* Set cursor to pointer on hover */
 }
