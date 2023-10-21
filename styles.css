@@ -122,16 +122,21 @@ body {
   transition: opacity 0.3s 0.2s, transform 0.3s 0.2s;
   position: absolute;
   bottom: 40px;
+  background-color:var(--button); /* Background color with 80% opacity */
+  padding: 5px; /* Add padding for better visibility */
 }
 
 #song{
   color:white;
   font-size:10px;
+  text-align: left;
 }
 #artist{
   color:rgb(147, 147, 147);
   font-size:9px;
+  text-align: left;
 }
+
 
 .audio-player-container:hover .song-info-container {
   opacity: 1;
