@@ -2,7 +2,7 @@
 /* Declare variables (for colors) */
 :root {
   --bg-primary: #0F0039; /* Page background color */
-  --bg-nav: #0f0039b2;
+  --bg-nav: #0f0039;
   --button: #7a20bf;
   --button-hover: #9938e3;
   --bg-accent: white;
@@ -21,10 +21,9 @@ body {
   font-family: "DM Sans", sans-serif !important;
 }
 
-/* Navbar background color */
-.nb-background-color {
+/* Navbar and footer background color */
+.nb-background-color, footer {
   background-color: var(--bg-nav);
-  backdrop-filter: blur(16px);
 }
 
 .nbMenuItem {
@@ -222,4 +221,26 @@ body {
 
 .mb-6 {
   margin-bottom: 4rem;
+}
+
+/* Footer */
+footer img {
+  width: 147.75px;
+}
+
+.w-max-content {
+  width: max-content;
+}
+
+footer li a {
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
+  transition: color 250ms ease-out;
+}
+footer li a:hover {
+  color: rgba(255, 255, 255, 1);
+}
+
+footer li + li {
+  margin-left: 1rem;
 }
