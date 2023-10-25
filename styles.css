@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap');
 /* Declare variables (for colors) */
 :root {
-  --bg-primary: #0F0039; /* Page background color */
+  --bg-primary: #0F0039; /* Landing page hero bg color */
+  --bg-secondary: #C5B5EF; /* Bg color */
   --bg-nav: #0f0039;
   --button: #7a20bf;
   --button-hover: #9938e3;
@@ -46,20 +47,19 @@ body {
 
 
 /* Hero section in the landing page */
-.hero {
+.landing-hero {
   background-color: var(--bg-primary);
   padding: 8rem 0 8rem;
 }
 
 /* Text gradient and font size */
-.hero h1 {
-  font-size: 4rem;
+.landing-hero h1 {
+  font-size: 3.5rem;
   font-weight: 800;
-  background: linear-gradient(to right, #FA00FF 0%, #4A52FF 100%);
+  background: linear-gradient(121deg, #FA00FF 0%, #FFCB00 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: -2px;
 }
 
 .description {
@@ -68,6 +68,7 @@ body {
   color: rgba(255, 255, 255, 0.6);
 }
 
+/* Sounds */
 .lofi_anime{
   background-image: url('img/background/lofi_anime.jpg');
   background-size: cover;
@@ -175,35 +176,9 @@ body {
   color: rgba(255, 255, 255, 0.6);
 }
 
-
-/* Text gradient and font size */
-.hero h1 {
-  font-size: 3.5rem;
-  font-weight: 800;
-  background: linear-gradient(121deg, #FA00FF 0%, #FFCB00 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.description {
-  width: 100%;
-  font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.city {
-  background-image: url('img/city.jpg');
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: bottom;
-}
-
-
 /* Value proposition section */
 .val-prop {
-  background: #C5B5EF;
+  background: var(--bg-secondary);
 }
 
 .val-prop h1 {
@@ -224,7 +199,7 @@ body {
 }
 
 /* Footer */
-footer img {
+.logo {
   width: 147.75px;
 }
 
@@ -243,4 +218,10 @@ footer li a:hover {
 
 footer li + li {
   margin-left: 1rem;
+}
+
+/* Tools */
+.tools-hero {
+  padding: 8rem 0 5rem;
+  background-color: var(--bg-secondary);
 }
