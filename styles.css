@@ -58,6 +58,11 @@ body {
 .landing-hero {
   background-color: var(--bg-hero);
   padding: 8rem 0 8rem;
+  background-image: url("img/mountain.png");
+  background-size: 70%;
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  height: 600px;
 }
 
 /* Text gradient and font size */
@@ -76,9 +81,20 @@ body {
   color: rgba(255, 255, 255, 0.6);
 }
 
+#mountain {
+  position: relative;
+  right: -100px;
+  bottom: 300px;
+  max-width: 100%;
+  z-index: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
 /* Value proposition section */
 .val-prop {
   background: var(--bg-val-prop);
+  padding: 100px;
 }
 
 .val-prop h1 {
@@ -216,16 +232,6 @@ body {
   padding: 10px 20px; /* Button padding */
   cursor: pointer; /* Set cursor to pointer on hover */
   border-radius: 100px;
-}
-
-#mountain {
-  position: absolute;
-  right: 0;
-  bottom: -1px;
-  max-width: 100%;
-  z-index: 1;
-  user-select: none;
-  pointer-events: none;
 }
 
 .ghost-btn {
