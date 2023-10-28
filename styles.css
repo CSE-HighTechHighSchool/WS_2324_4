@@ -81,14 +81,13 @@ body {
   color: rgba(255, 255, 255, 0.6);
 }
 
-#mountain {
-  position: relative;
-  right: -100px;
-  bottom: 300px;
-  max-width: 100%;
-  z-index: 1;
-  user-select: none;
-  pointer-events: none;
+#supercharge {
+  background-image: url("img/yellow-highlight.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 200px;
+  padding-top: 50px;
 }
 
 /* Value proposition section */
