@@ -103,10 +103,11 @@
         </div>
       </div>
     </section>
+    <!-- val-prop = custom class to target elements inside value proposition section -->
     <section class="val-prop py-5">
       <div class="container">
-        <h1 class="text-center mx-auto mb-3">
-          Enhance your study guides with our powerful tools.
+        <h1 class="text-center mx-auto mb-3 fw-bold">
+          Supercharge <i class="bi bi-lightning-charge"></i> your study guides with our cutting-edge tools.
         </h1>
         <div class="row">
           <div class="col-sm-6 col-lg-4 p-4">
@@ -136,23 +137,26 @@
           <div
             class="col-sm-6 col-lg-12 d-flex justify-content-center align-items-center"
           >
-            <button class="btn btn-dark rounded-pill px-3">See more</button>
+            <a href="tools.html"><button class="btn btn-dark rounded-pill px-3">See more</button></a>
           </div>
         </div>
-        <div class="row mt-5">
+        <!-- mt-6 = custom class for larger margin than mt-5  -->
+        <div class="row mt-6 mb-5">
           <div
             class="col-md-6 d-flex flex-column justify-content-center align-items-center align-items-md-start e-5 mb-4 mb-md-0 text-center text-md-start"
           >
-            <h1>Stress less, vibe more.</h1>
+            <h1 class="fw-bold">Stress less, vibe <i class="bi bi-headphones"></i> more.</h1>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus
               incidunt, cum laboriosam accusantium dolores, culpa deserunt
               maxime inventore earum deleniti adipisci assumenda? Blanditiis
               delectus sed fugiat optio nobis, recusandae iure?
             </p>
-            <button class="btn btn-dark rounded-pill px-3">
-              Visit Sounds™
-            </button>
+            <a href="" src="sounds.html">
+              <button class="btn btn-dark rounded-pill px-3">
+                Visit Sounds™
+              </button>
+            </a>
           </div>
           <div class="col-md-6 d-flex align-items-center">
             <img
@@ -160,6 +164,26 @@
               src="img/sounds.png"
               alt="GPA Sounds Page"
             />
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="pricing py-5 text-light">
+      <div class="container">
+        <p class="opacity-50 text-center mt-5 mb-0">Pricing</p>
+        <h1 class="text-center mb-5">Pay as you go</h1>
+        <div class="pricing-grid gap-3 mb-5">
+          <div>
+            <h4 class="opacity-75">Basic Plan</h4>
+            <h1>$0 <span class="fs-5 opacity-50">(free)</span></h1>
+            <ul>
+              <li>Say hi</li>
+            </ul>
+          </div>
+          <!-- pro-plan = gradient border -->
+          <div class="pro-plan">
+            <h4 class="opacity-75">Pro Plan</h4>
+            <h1>$1000 <span class="fs-5 opacity-50">/month</span></h1>
           </div>
         </div>
       </div>
@@ -181,6 +205,7 @@
               <li class="list-inline-item"><a href="index.html">Home</a></li>
               <li class="list-inline-item"><a href="tools.html">Tools</a></li>
               <li class="list-inline-item"><a href="sounds.html">Sounds</a></li>
+              <li class="list-inline-item"><a href="login.html">Login</a></li>
               <li class="list-inline-item"><a href="signup.html">Sign Up</a></li>
             </ul>
           </div>

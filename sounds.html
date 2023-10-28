@@ -71,6 +71,7 @@
         </div>
       </div>
     </nav>
+    <a class="image-credit" href="https://www.freepik.com/free-ai-image/cartoon-lofi-young-manga-style-girl-studying-while-listening-music-raining-street-ai-generative_43227423.htm#query=lofi%20anime&position=0&from_view=keyword&track=ais">Image by chandlervid85</a>
     <div class="audio-player-container">
       <audio src="" id="audioPlayer" preload="auto"></audio>
       <div class="controls">
@@ -78,20 +79,15 @@
         <button id="playPauseBtn" class="control-btn"><i class="bi bi-play"></i></button>
         <button id="nextBtn" class="control-btn"><i class="bi bi-skip-forward"></i></button>
       </div>
-      <div class="song-info-container">
+      <div class="song-info-container text-light text-center">
         <div class="song-info">
           <div id="song"></div>
-          <div id="artist"></div>
+          <div id="artist" class="opacity-50"></div>
         </div>
-        <br>
         <input type="range" id="volumeSlider" class="slider" min="0" max="100" step="1" value="100">
       </div>
     </div>
-    <button id="changeThemeBtn">Change Theme</button>
-    <a class="image-credit" href="https://www.freepik.com/free-ai-image/cartoon-lofi-young-manga-style-girl-studying-while-listening-music-raining-street-ai-generative_43227423.htm#query=lofi%20anime&position=0&from_view=keyword&track=ais">Image by chandlervid85</a>
+    <button id="changeThemeBtn">Theme: Lofi</button>
     <script src="audioPlayer.js"></script>
-    <script>
-        audioPlayer();
-    </script>
   </body>
 </html>

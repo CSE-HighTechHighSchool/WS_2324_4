@@ -1,16 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap');
 /* Declare variables (for colors) */
 :root {
-  --bg-primary: #0F0039; /* Landing page hero bg color */
-  --bg-secondary: #C5B5EF; /* Bg color */
-  --bg-nav: #0f0039;
+  --bg-hero: #0F0039; /* Landing page hero background color */
+  --bg-nav: var(--bg-hero); /* Navigation bar background color*/
+  --bg-val-prop: #C5B5EF; /* Background color for value proposition section in landing page */
+  --bg-pricing: #19005a; /* Background color for pricing section in landing page */
+  --bg-tools: #d8cef5;
+  
   --button: #7a20bf;
   --button-hover: #9938e3;
   --bg-accent: white;
   
 }
 
-/* Reset stypes */
+/* Reset types */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -22,20 +25,25 @@ body {
   font-family: "DM Sans", sans-serif !important;
 }
 
+/* ----------------------- Navigation bar ----------------------- */
+
 /* Navbar and footer background color */
 .nb-background-color, footer {
   background-color: var(--bg-nav);
 }
 
+/* Font size and spacing for navigation links */
 .nbMenuItem {
   font-size: 1.1rem;
   margin-left: 10px;
 }
 
+/* Margin for buttons in nav bar */
 .nav-btn {
   margin-left: 20px;
 }
 
+/* Sign up button */
 .signup {
   display: flex;
   align-items: center;
@@ -45,10 +53,10 @@ body {
   border-radius: 18px;
 }
 
-
+/* ----------------------- Landing page ----------------------- */
 /* Hero section in the landing page */
 .landing-hero {
-  background-color: var(--bg-primary);
+  background-color: var(--bg-hero);
   padding: 8rem 0 8rem;
 }
 
@@ -62,14 +70,56 @@ body {
   background-clip: text;
 }
 
+/* Font size and color for text underneath hero title */
 .description {
-  width: 100%;
   font-size: 1.05rem;
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* Sounds */
-.lofi_anime{
+/* Value proposition section */
+.val-prop {
+  background: var(--bg-val-prop);
+}
+
+.val-prop h1 {
+  max-width: 640px;
+}
+
+/* Pricing section */
+.pricing {
+  background-color: var(--bg-pricing);
+  padding: 4rem 0;
+}
+
+.pricing-grid {
+  display: grid;
+  max-width: 800px;
+  margin: 0 auto;
+  grid-template-columns: 1fr;
+}
+
+@media only screen and (min-width: 576px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.pricing-grid > * {
+  padding: 2rem 3rem;
+}
+
+/* Pro Plan */
+.pro-plan {
+  position: relative;
+  border: solid 3px transparent;
+  border-radius: 20px;
+  background: linear-gradient(var(--bg-pricing), var(--bg-pricing)) padding-box,
+              linear-gradient(to right, #FA00FF 0%, #FFCB00 100%) border-box;
+}
+
+
+/* ----------------------- Sounds ----------------------- */
+.lofi_anime {
   background-image: url('img/background/lofi_anime.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -79,21 +129,26 @@ body {
 
 .image-credit {
   position: fixed;
-  bottom: 10px;
-  left: 10px;
+  bottom: 15px;
+  left: 20px;
   font-size: 12px;
-  color: #b464cc; /* Change this to the desired text color */
+  color: #ffffff8e; /* Change this to the desired text color */
   text-decoration: none;
+  transition: color 200ms ease-out;
+}
+
+.image-credit:hover {
+  color: #ffffffff;
 }
 
 .audio-player-container {
   position: fixed;
-  bottom: 0;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--bg-nav);
-  padding:5px;
-  border-radius: 20px;
+  padding: 6px;
+  border-radius: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,7 +156,7 @@ body {
 
 .control-btn {
   background-color: var(--button);
-  color: #fff; /* Button text color */
+  color: #fff;
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -121,22 +176,21 @@ body {
   align-items: center;
   opacity: 0;
   transform: translateY(0px);
-  transition: opacity 0.3s 0.2s, transform 0.3s 0.2s;
+  transition: opacity 0.3s, transform 0.3s;
   position: absolute;
   bottom: 40px;
-  background-color:var(--button); /* Background color with 80% opacity */
-  padding: 5px; /* Add padding for better visibility */
+  background-color: var(--button);
+  padding: 8px 12px;
+  border-radius: 8px;
+  width: 120%;
 }
 
-#song{
-  color:white;
-  font-size:10px;
-  text-align: left;
+#song {
+  font-size: 14px;
 }
-#artist{
-  color:rgb(147, 147, 147);
-  font-size:9px;
-  text-align: left;
+
+#artist {
+  font-size: 10px;
 }
 
 
@@ -145,15 +199,15 @@ body {
   transform: translateY(-10px);
 }
 
-
 .slider {
   width: 100%;
-  accent-color:var(--button);
+  background-color: transparent;
+  accent-color: var(--bg-val-prop);
 }
 
 #changeThemeBtn {
   position: fixed;
-  bottom: 20px;
+  bottom: 10px;
   right: 20px;
   /* Additional styles for the button (optional) */
   background-color: #007bff; /* Button background color */
@@ -161,41 +215,22 @@ body {
   border: none; /* Remove button border */
   padding: 10px 20px; /* Button padding */
   cursor: pointer; /* Set cursor to pointer on hover */
+  border-radius: 100px;
 }
 
 #mountain {
   position: absolute;
   right: 0;
   bottom: -1px;
-  max-width:100%;
+  max-width: 100%;
   z-index: 1;
+  user-select: none;
+  pointer-events: none;
 }
 
 .ghost-btn {
   padding: 0.375rem 0.75rem;
   color: rgba(255, 255, 255, 0.6);
-}
-
-/* Value proposition section */
-.val-prop {
-  background: var(--bg-secondary);
-}
-
-.val-prop h1 {
-  font-weight: 700;
-}
-
-.val-prop h2 {
-  font-weight: bold;
-}
-
-/* Overriding Bootstrap styles */
-.container {
-  padding: 0 1rem;
-}
-
-.mb-6 {
-  margin-bottom: 4rem;
 }
 
 /* Footer */
@@ -220,8 +255,54 @@ footer li + li {
   margin-left: 1rem;
 }
 
-/* Tools */
+/* ----------------------- Tools page -----------------------*/
+main {
+  background-color: var(--bg-tools);
+  padding: 3.5rem 0 5rem;
+}
+
 .tools-hero {
-  padding: 8rem 0 5rem;
-  background-color: var(--bg-secondary);
+  padding: 6rem 0 2rem;
+}
+
+section.tools h2 {
+  margin-top: 4rem;
+}
+
+.tools-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+}
+
+@media only screen and (min-width: 576px) {
+  .tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .tools-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .tools-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.tools-grid .card {
+  /* background-color: rgba(255, 255, 255, 0.85); */
+}
+
+
+/* ----------------------- Adding to Bootstrap styles ----------------------- */
+.container {
+  padding: 0 1rem;
+}
+
+.mt-6 {
+  margin-top: 6rem;
 }

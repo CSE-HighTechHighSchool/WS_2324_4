@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
   var currentSong = 0;
   var themes = [
     {
+      name: 'Lofi',
       background: 'url("img/background/lofi_anime.jpg")',
       playlist: [
         "music/lofi/Silent_Wood~Purrple_Cat.mp3",
@@ -10,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
       ]
     },
     {
+      name: "Classical",
       background: 'url("img/background/classical_piano.webp")',
       playlist: [
         "music/classical/Op._27,_No._2_in_D-flat~Chopin.mp3",
@@ -19,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     // Add more themes as needed
   ];
-  var currentThemeIndex = 0;
 
+  var currentThemeIndex = 0;
   
   var audioPlayer = document.getElementById("audioPlayer");
   var playPauseBtn = document.getElementById("playPauseBtn");
@@ -30,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
   var changeThemeBtn = document.getElementById("changeThemeBtn");
   var playlist = themes[0].playlist;
   audioPlayer.src = playlist[currentSong];
+
   function applyTheme() {
     document.body.style.backgroundImage = themes[currentThemeIndex].background;
     playlist = themes[currentThemeIndex].playlist;
@@ -39,7 +42,12 @@ document.addEventListener("DOMContentLoaded", function() {
   function setVolume() {
     audioPlayer.volume = volumeSlider.value / 100;
   }
+
   function updateSongInfo() {
+      // File name: Silent_Wood~Purrple_Cat.mp3
+      // becomes
+      // Song title: Silent Wood
+      // Artist: Purrple Cat
       [song.textContent, artist.textContent] = playlist[currentSong].split('/').pop().replace(/_/g, ' ').replace('.mp3', '').split('~');
   }
 
@@ -100,7 +108,10 @@ document.addEventListener("DOMContentLoaded", function() {
   });
   changeThemeBtn.addEventListener("click", function() {
     currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+    changeThemeBtn.textContent = "Theme: " + themes[currentThemeIndex].name;
+
     applyTheme();
+    playMusic();
   });
 
   updateSongInfo();
