@@ -89,10 +89,9 @@ body {
   background-clip: text;
 }
 
-/* Font size and color for text underneath hero title */
+/* Font size for text underneath hero title */
 .description {
   font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.6);
 }
 
 
@@ -351,7 +350,7 @@ main {
 
 @media only screen and (min-width: 1200px) {
   .tools-hero::after {
-    background: linear-gradient(to right, #0000009c 0%, #00000089 25%, transparent 80%, transparent 100%);
+    background: linear-gradient(to right, #0000009c 0%, #00000089 20%, transparent 60%, transparent 100%);
   }
 }
 
@@ -396,4 +395,8 @@ section.tools h2 {
 
 .mt-6 {
   margin-top: 6rem;
+}
+
+.text-gray {
+  color: rgba(255, 255, 255, 0.6);
 }
