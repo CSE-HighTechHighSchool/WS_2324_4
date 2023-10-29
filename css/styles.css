@@ -306,16 +306,19 @@ footer li + li {
 }
 
 /* ----------------------- Tools page -----------------------*/
+/* Make navbar initially transparent (will change when user scrolls) */
 #navbar {
   background-color: transparent;
   transition: background-color 250ms ease-out;
 }
 
+/* Light purple background */
 main {
   background-color: var(--bg-tools);
   padding-bottom: 5rem;
 }
 
+/* Hero text and image */
 .tools-hero {
   padding: 6rem 0 10rem;
   background-image: url("../img/tools.png");
@@ -378,7 +381,7 @@ section.tools h2 {
 }
 
 .tools-grid .card {
-  /* background-color: rgba(255, 255, 255, 0.85); */
+  background-color: rgba(255, 255, 255, 0.85);
 }
 
 
