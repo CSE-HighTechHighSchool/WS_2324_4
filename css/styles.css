@@ -88,12 +88,6 @@ body {
   background-clip: text;
 }
 
-/* Font size for description underneath hero title */
-.description {
-  font-size: 1.05rem;
-}
-
-
 /* Value proposition section */
 .val-prop {
   background: var(--bg-val-prop);
