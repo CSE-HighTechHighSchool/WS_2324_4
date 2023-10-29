@@ -55,6 +55,31 @@ body {
 }
 
 /* ----------------------- Landing page ----------------------- */
+
+#cloud {
+  position: absolute;
+  top: 5px;
+  width: 35%;   
+  animation: cloud-animation 20s linear infinite;
+}
+
+@keyframes cloud-animation {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.2;
+  }
+  70% {
+    opacity: 0.2;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
 /* Hero section in the landing page */
 .landing-hero {
   background-color: var(--bg-hero);
