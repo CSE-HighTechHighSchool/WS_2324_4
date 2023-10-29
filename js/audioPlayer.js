@@ -81,11 +81,21 @@ document.addEventListener("DOMContentLoaded", function () {
   
   // Apply the theme (lofi or classical) and start playing the first song
   function applyTheme() {
+    // currentTheme = an object with all the data for the theme
     let currentTheme = themes[currentThemeIndex];
+
+    // Change background image
     document.body.style.backgroundImage =
       'url("' + currentTheme.background + '")';
+    
+    // Update image credit link and text
     imgCredit.src = currentTheme.imgSrc;
     imgCredit.textContent = "Image by " + currentTheme.imgAuthor;
+    
+    // Update theme button text to display current theme name
+    changeThemeBtn.textContent = "Theme: " + themes[currentThemeIndex].name;
+
+    // Change playlist and play the first song
     playlist = currentTheme.playlist;
     currentSong = 0;
     playNewSong();
@@ -101,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
     playNewSong(); // Play the song
   });
 
+  // When previous button clicked, go back a song and then play it
   document.getElementById("prevBtn").addEventListener("click", function () {
     currentSong--;
     if (currentSong < 0) {
@@ -109,6 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
     playNewSong();
   });
 
+  // Pause or play the song when pause/play button is clicked
   playPauseBtn.addEventListener("click", function () {
     if (playing) {
       pauseMusic();
@@ -118,6 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
     updateSongInfo();
   });
 
+  // When the music ends, move on to the next song
   audioPlayer.addEventListener("ended", function () {
     currentSong++;
     if (currentSong >= playlist.length) {
@@ -131,12 +144,12 @@ document.addEventListener("DOMContentLoaded", function () {
     setVolume();
   });
 
-  // When theme button is clicked, update text on the button and apply the theme
+  // When theme button is clicked, apply the theme
   changeThemeBtn.addEventListener("click", function () {
+    // Go on to the next theme and
+    // wrap back to the first theme if there are no more themes to go through
     currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-    changeThemeBtn.textContent = "Theme: " + themes[currentThemeIndex].name;
-
-    applyTheme();
+    applyTheme(); // Apply the theme
   });
 
   updateSongInfo();
@@ -148,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var analyser = audioContext.createAnalyser(); // Used to get frequency data
   // https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/fftSize
   // Use fast fourier transform to get frequency data from the audio
-  analyser.fftSize = 256;
+  analyser.fftSize = 2048;
 
   // Connect the audio player to the analyser
   var source = audioContext.createMediaElementSource(audioPlayer); // Get source from <audio> element
@@ -176,9 +189,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // This function copies the audio data into the dataArray
     analyser.getByteFrequencyData(dataArray);
 
-    var barWidth = 2; // Bars have a width of 2px
-    var barSpacing = window.innerWidth * 0.01; // Spacing of 1% of the screen width
-    var xStart = 5; // Start first rectangle 5px into the canvas
+    var barWidth = 1; // Bars have a width of 1px
+    var barSpacing = window.innerWidth * 0.0025; // Spacing of 0.25% of the screen width
+    var xStart = 2; // Start first rectangle 2px into the canvas
     var centerY = canvas.height / 2; // Center vertically in canvas
 
     // /https://www.w3schools.com/TAgs/canvas_clearrect.asp
@@ -187,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     for (var i = 0; i < bufferLength; i++) {
       var freqData = dataArray[i] / 255; // Frequency data ranges 0-255; here we normalize the data between 0-1
-      ctx.fillStyle = "rgba(255, 255, 255, 0.25)"; // Color of the bars
+      ctx.fillStyle = "rgba(255, 255, 255, 0.5)"; // Color of the bars
       var barHeight = (canvas.height * freqData) / 2; // Adjust the height based on loudness at this frequency
       // Create the rectangle (x, y, w, h)
       // It will be centered vertically in the middle of the canvas
