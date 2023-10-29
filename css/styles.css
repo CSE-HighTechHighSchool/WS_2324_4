@@ -167,7 +167,11 @@ body {
 }
 
 
-/* ----------------------- Sounds ----------------------- */
+/* ----------------------- Sounds page ----------------------- */
+.navbar-gradient {
+  background: linear-gradient(to bottom, #0000009c 0%, #00000089 40%, transparent);
+}
+
 .lofi_anime {
   background-image: url('../img/background/lofi_anime.jpg');
   background-size: cover;
@@ -244,7 +248,7 @@ body {
 
 .audio-player-container:hover .song-info-container {
   opacity: 1;
-  transform: translateY(-10px);
+  transform: translateY(-14px);
 }
 
 .slider {
