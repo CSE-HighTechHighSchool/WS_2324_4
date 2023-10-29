@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var imgCredit = document.getElementById("img-credit");          // Credit for background image
 
   // State variables
-  var currentThemeIndex = 0;                // 0 = Lofi, 1 = Classical
+  var currentThemeIndex = 0;                // 0 = Lofi, 1 = Classical, 2 = Nature
   var playing = false;                      // If audio is playing or not
   var playlist = themes[0].playlist;        // Playlist array
   var currentSong = 0;                      // Song index in the playlist
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
     playing = false;
   }
   
-  // Apply the theme (lofi or classical) and start playing the first song
+  // Apply the theme and start playing the first song
   function applyTheme() {
     // currentTheme = an object with all the data for the theme
     let currentTheme = themes[currentThemeIndex];
