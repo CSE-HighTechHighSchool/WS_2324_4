@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
-  var currentSong = 0;
   var themes = [
     {
       name: 'Lofi',
-      background: 'url("../img/background/lofi_anime.jpg")',
+      background: '../img/background/lofi_anime.jpg',
+      imgSrc: 'https://www.freepik.com/free-ai-image/cartoon-lofi-young-manga-style-girl-studying-while-listening-music-raining-street-ai-generative_43227423.htm#query=lofi%20anime&position=0&from_view=keyword&track=ais',
+      imgAuthor: 'chandlervid85',
       playlist: [
         "music/lofi/Silent_Wood~Purrple_Cat.mp3",
         "music/lofi/Where_The_Waves_Take_Us~Purrple_Cat.mp3",
@@ -12,7 +13,9 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     {
       name: "Classical",
-      background: 'url("../img/background/classical_piano.webp")',
+      background: '../img/background/classical_piano.webp',
+      imgSrc: 'https://wall.alphacoders.com/big.php?i=452391',
+      imgAuthor: 'miroha',
       playlist: [
         "music/classical/Op._27,_No._2_in_D-flat~Chopin.mp3",
         "music/classical/Piano_Concerto_No._21~Mozart.mp3",
@@ -21,28 +24,35 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     // Add more themes as needed
   ];
-
-  var currentThemeIndex = 0;
   
-  var audioPlayer = document.getElementById("audioPlayer");
-  var playPauseBtn = document.getElementById("playPauseBtn");
-  var artist = document.getElementById("artist");
-  var song = document.getElementById("song");
-  var playing = false;
-  var changeThemeBtn = document.getElementById("changeThemeBtn");
-  var playlist = themes[0].playlist;
-  audioPlayer.src = playlist[currentSong];
+  // Target all buttons we need
+  var audioPlayer = document.getElementById("audioPlayer");       // <audio> element
+  var playPauseBtn = document.getElementById("playPauseBtn");     // Play and pause button
+  var song = document.getElementById("song");                     // Song name in tooltip
+  var artist = document.getElementById("artist");                 // Artist of song in tooltip
+  var changeThemeBtn = document.getElementById("changeThemeBtn"); // Button to change theme
+  
+  // State variables
+  var currentThemeIndex = 0;                // 0 = Lofi, 1 = Classical
+  var playing = false;                      // If audio is playing or not
+  var playlist = themes[0].playlist;        // Playlist array
+  var currentSong = 0;                      // Song index in the playlist
+  audioPlayer.src = playlist[currentSong];  // Set <audio>'s source to the first song in playlist
 
+  // Apply the theme (lofi or classical) and start playing the first song
   function applyTheme() {
-    document.body.style.backgroundImage = themes[currentThemeIndex].background;
+    document.body.style.backgroundImage = "url(\"" + themes[currentThemeIndex].background + ")";
     playlist = themes[currentThemeIndex].playlist;
     currentSong = 0;
     playCurrentSong();
   }
+
+  // Set volume set by slider
   function setVolume() {
     audioPlayer.volume = volumeSlider.value / 100;
   }
 
+  // Updates song info in 
   function updateSongInfo() {
       // Parse file name to readable format
       // File name: Silent_Wood~Purrple_Cat.mp3

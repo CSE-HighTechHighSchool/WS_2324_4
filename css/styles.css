@@ -160,6 +160,7 @@ body {
 
 
 /* ----------------------- Sounds page ----------------------- */
+/* Canvas for audio visualizer */
 #visualizer {
   position: absolute;
   top: 0;
@@ -168,11 +169,13 @@ body {
   height: 100%;
 }
 
+/* Navbar has a black to transparent gradient */
 .navbar-gradient {
   background: linear-gradient(to bottom, #0000009c 0%, #00000089 40%, transparent);
 }
 
-.lofi_anime {
+/* Background image of sounds page */
+.sounds-bg {
   background-image: url('../img/background/lofi_anime.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -180,6 +183,7 @@ body {
   background-position: bottom;
 }
 
+/* Link for image credit */
 .image-credit {
   position: fixed;
   bottom: 15px;
@@ -194,6 +198,7 @@ body {
   color: #ffffffff;
 }
 
+/* Container for the controls */
 .audio-player-container {
   position: fixed;
   bottom: 10px;
@@ -207,6 +212,7 @@ body {
   align-items: center;
 }
 
+/* Buttons in controls */
 .control-btn {
   background-color: var(--button);
   color: #fff;
@@ -223,6 +229,7 @@ body {
   background-color: var(--button-hover);
 }
 
+/* Tooltip for song info */
 .song-info-container {
 	display: flex;
 	flex-direction: column;
@@ -239,25 +246,30 @@ body {
 	box-shadow: 0 0 10px rgba(0,0,0,0.8);
 }
 
+/* Tooltip: Song name */
 #song {
   font-size: 14px;
 }
 
+/* Tooltip: Song artist */
 #artist {
   font-size: 10px;
 }
 
-.audio-player-container:hover .song-info-container {
-  opacity: 1;
-  transform: translateY(-14px);
-}
-
+/* Volume slider in tooltip */
 .slider {
   width: 100%;
   background-color: transparent;
   accent-color: var(--bg-val-prop);
 }
 
+/* When the controls are hovered, the tooltip will show */
+.audio-player-container:hover .song-info-container {
+  opacity: 1;
+  transform: translateY(-14px);
+}
+
+/* Change theme button */
 #changeThemeBtn {
   position: fixed;
   bottom: 10px;
@@ -274,16 +286,8 @@ body {
   background-color: var(--button-hover);
 }
 
-.ghost-btn {
-  padding: 0.375rem 0.75rem;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.ghost-btn:hover, .ghost-btn:active, .ghost-btn:focus {
-  color: rgba(255, 255, 255, 1) !important;
-}
-
-/* Footer */
+/* ----------------------- Footer ----------------------- */
+/* Set width for logo */
 .logo {
   width: 147.75px;
 }
@@ -292,6 +296,7 @@ body {
   width: max-content;
 }
 
+/* Footer links */
 footer li a {
   color: rgba(255, 255, 255, 0.55);
   text-decoration: none;
@@ -396,4 +401,13 @@ section.tools h2 {
 
 .text-gray {
   color: rgba(255, 255, 255, 0.6);
+}
+
+.ghost-btn {
+  padding: 0.375rem 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.ghost-btn:hover, .ghost-btn:active, .ghost-btn:focus {
+  color: rgba(255, 255, 255, 1) !important;
 }
