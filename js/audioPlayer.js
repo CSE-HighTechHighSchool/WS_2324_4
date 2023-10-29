@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Apply the theme (lofi or classical) and start playing the first song
   function applyTheme() {
-    document.body.style.backgroundImage = "url(\"" + themes[currentThemeIndex].background + ")";
+    document.body.style.backgroundImage = "url(\"" + themes[currentThemeIndex].background + "\")";
     playlist = themes[currentThemeIndex].playlist;
     currentSong = 0;
     playCurrentSong();
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function() {
     audioPlayer.volume = volumeSlider.value / 100;
   }
 
-  // Updates song info in 
+  // Updates song info in
   function updateSongInfo() {
       // Parse file name to readable format
       // File name: Silent_Wood~Purrple_Cat.mp3
