@@ -309,12 +309,11 @@ main {
 }
 
 .tools-hero {
-  padding: 6rem 0 2rem;
+  padding: 6rem 0 10rem;
   background-image: url("../img/tools.png");
   background-size: cover;
   background-position: 75% center;
   background-repeat: no-repeat;
-  height: 500px;
   padding-top: 200px;
   position: relative;
   z-index: 1;
