@@ -305,7 +305,7 @@ footer li + li {
 
 main {
   background-color: var(--bg-tools);
-  padding-bottom: q5rem;
+  padding-bottom: 5rem;
 }
 
 .tools-hero {
