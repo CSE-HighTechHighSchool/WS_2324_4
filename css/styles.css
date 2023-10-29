@@ -190,7 +190,7 @@ body {
 }
 
 .pricing-grid > * {
-  padding: 2rem 3rem;
+  padding: 2rem 2.5rem;
 }
 
 /* Basic Plan border */
@@ -377,7 +377,7 @@ footer li + li {
 
 /* ----------------------- Tools page -----------------------*/
 /* Make navbar initially transparent (will change when user scrolls) */
-#navbar {
+.tools-navbar {
   background-color: transparent;
   transition: background-color 250ms ease-out;
 }
