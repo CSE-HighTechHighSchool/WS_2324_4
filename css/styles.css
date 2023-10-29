@@ -168,6 +168,14 @@ body {
 
 
 /* ----------------------- Sounds page ----------------------- */
+#visualizer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 .navbar-gradient {
   background: linear-gradient(to bottom, #0000009c 0%, #00000089 40%, transparent);
 }
@@ -224,18 +232,19 @@ body {
 }
 
 .song-info-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  opacity: 0;
-  transform: translateY(0px);
-  transition: opacity 0.3s, transform 0.3s;
-  position: absolute;
-  bottom: 40px;
-  background-color: var(--button);
-  padding: 8px 12px;
-  border-radius: 8px;
-  width: 120%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	opacity: 0;
+	transform: translateY(0px);
+	transition: opacity 0.3s, transform 0.3s;
+	position: absolute;
+	bottom: 40px;
+	background-color: var(--bg-nav);
+	padding: 8px 12px;
+	border-radius: 8px;
+	width: 120%;
+	box-shadow: 0 0 10px rgba(0,0,0,0.8);
 }
 
 #song {
@@ -261,13 +270,16 @@ body {
   position: fixed;
   bottom: 10px;
   right: 20px;
-  /* Additional styles for the button (optional) */
-  background-color: #007bff; /* Button background color */
-  color: #ffffff; /* Button text color */
-  border: none; /* Remove button border */
-  padding: 10px 20px; /* Button padding */
-  cursor: pointer; /* Set cursor to pointer on hover */
+  background-color: var(--button);
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
   border-radius: 100px;
+}
+
+#changeThemeBtn:hover {
+  background-color: var(--button-hover);
 }
 
 .ghost-btn {
@@ -339,7 +351,7 @@ main {
 
 @media only screen and (min-width: 1200px) {
   .tools-hero::after {
-    background: linear-gradient(to right, #0000009c 0%, #00000089 40%, transparent 89%, transparent 100%);
+    background: linear-gradient(to right, #0000009c 0%, #00000089 25%, transparent 80%, transparent 100%);
   }
 }
 
