@@ -3,7 +3,7 @@
 :root {
   --bg-hero: #0F0039; /* Landing page hero background color */
   --bg-nav: var(--bg-hero); /* Navigation bar background color*/
-  --bg-val-prop: #C5B5EF; /* Background color for value proposition section in landing page */
+  --bg-val-prop: #c3b3ed; /* Background color for value proposition section in landing page */
   --bg-pricing: #19005a; /* Background color for pricing section in landing page */
   --bg-tools: #d8cef5;
   
@@ -57,12 +57,24 @@ body {
 /* Hero section in the landing page */
 .landing-hero {
   background-color: var(--bg-hero);
-  padding: 8rem 0 8rem;
-  background-image: url("img/mountain.png");
-  background-size: 70%;
+  padding: 9rem 0;
+  background-image: url("img/mountain-mobile.png");
+  background-size: 100%;
   background-position: right bottom;
   background-repeat: no-repeat;
-  height: 600px;
+}
+
+@media only screen and (min-width: 570px) {
+  .landing-hero {
+    background-image: url("img/mountain-mobile.png");
+    background-size: 85%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .landing-hero {
+    background-size: 70%;
+  }
 }
 
 /* Text gradient and font size */
