@@ -121,16 +121,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // -------------------------------------- AUDIO VISUALIZER --------------------------------------
 
-  var audioContext = new window.AudioContext(); // Create an audio context for managing audio
+  var audioContext = new AudioContext(); // Create an audio context for managing audio
   var analyser = audioContext.createAnalyser(); // Used to get frequency data
   // https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/fftSize
   // Use fast fourier transform to get frequency data from the audio
   analyser.fftSize = 256;
   
   // Connect the audio player to the analyser
-  var source = audioContext.createMediaElementSource(audioPlayer);
-  source.connect(analyser);
-  analyser.connect(audioContext.destination);
+  var source = audioContext.createMediaElementSource(audioPlayer); // Get source from <audio> element
+  source.connect(analyser);                   // Reroute audio to analyser
+  analyser.connect(audioContext.destination); // Then route it to the device's speakers
 
   // Get canvas from DOM
   var canvas = document.getElementById("visualizer");
@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
-  // How many frequency "binw" we have; this will tell how many bars we'll have
+  // How many frequency "bins" we have; this will tell how many bars we'll have
   var bufferLength = analyser.frequencyBinCount;
 
   // Function to draw the visualizer
