@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
   var themes = [
     {
       name: 'Lofi',
-      background: 'url("img/background/lofi_anime.jpg")',
+      background: 'url("../img/background/lofi_anime.jpg")',
       playlist: [
         "music/lofi/Silent_Wood~Purrple_Cat.mp3",
         "music/lofi/Where_The_Waves_Take_Us~Purrple_Cat.mp3",
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
     },
     {
       name: "Classical",
-      background: 'url("img/background/classical_piano.webp")',
+      background: 'url("../img/background/classical_piano.webp")',
       playlist: [
         "music/classical/Op._27,_No._2_in_D-flat~Chopin.mp3",
         "music/classical/Piano_Concerto_No._21~Mozart.mp3",
@@ -44,8 +44,9 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   function updateSongInfo() {
+      // Parse file name to readable format
       // File name: Silent_Wood~Purrple_Cat.mp3
-      // becomes
+      //          becomes
       // Song title: Silent Wood
       // Artist: Purrple Cat
       [song.textContent, artist.textContent] = playlist[currentSong].split('/').pop().replace(/_/g, ' ').replace('.mp3', '').split('~');

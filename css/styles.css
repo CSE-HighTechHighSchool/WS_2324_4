@@ -3,7 +3,7 @@
 :root {
   --bg-hero: #0F0039; /* Landing page hero background color */
   --bg-nav: var(--bg-hero); /* Navigation bar background color*/
-  --bg-val-prop: #c3b3ed; /* Background color for value proposition section in landing page */
+  --bg-val-prop: #c5b5ef; /* Background color for value proposition section in landing page */
   --bg-pricing: #19005a; /* Background color for pricing section in landing page */
   --bg-tools: #d8cef5;
   
@@ -59,7 +59,7 @@ body {
 .landing-hero {
   background-color: var(--bg-hero);
   padding: 9rem 0;
-  background-image: url("img/mountain-mobile.png");
+  background-image: url("../img/mountain-mobile.png");
   background-size: 100%;
   background-position: right bottom;
   background-repeat: no-repeat;
@@ -67,13 +67,14 @@ body {
 
 @media only screen and (min-width: 570px) {
   .landing-hero {
-    background-image: url("img/mountain-mobile.png");
+    background-image: url("../img/mountain-mobile.png");
     background-size: 85%;
   }
 }
 
 @media only screen and (min-width: 992px) {
   .landing-hero {
+    background-image: url("../img/mountain.png");
     background-size: 70%;
   }
 }
@@ -124,7 +125,7 @@ body {
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-image: url("img/yellow-highlight.png");
+  background-image: url("../img/yellow-highlight.png");
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -168,7 +169,7 @@ body {
 
 /* ----------------------- Sounds ----------------------- */
 .lofi_anime {
-  background-image: url('img/background/lofi_anime.jpg');
+  background-image: url('../img/background/lofi_anime.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -270,6 +271,10 @@ body {
   color: rgba(255, 255, 255, 0.6);
 }
 
+.ghost-btn:hover, .ghost-btn:active, .ghost-btn:focus {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
 /* Footer */
 .logo {
   width: 147.75px;
@@ -293,14 +298,19 @@ footer li + li {
 }
 
 /* ----------------------- Tools page -----------------------*/
+#navbar {
+  background-color: transparent;
+  transition: background-color 250ms ease-out;
+}
+
 main {
   background-color: var(--bg-tools);
-  padding: 3.5rem 0 5rem;
+  padding-bottom: q5rem;
 }
 
 .tools-hero {
   padding: 6rem 0 2rem;
-  background-image: url("img/tools.png");
+  background-image: url("../img/tools.png");
   background-size: cover;
   background-position: 75% center;
   background-repeat: no-repeat;
