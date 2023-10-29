@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Theme background
   var themes = [
     {
       name: "Lofi",
@@ -21,6 +22,17 @@ document.addEventListener("DOMContentLoaded", function () {
         "music/classical/Op._27,_No._2_in_D-flat~Chopin.mp3",
         "music/classical/Piano_Concerto_No._21~Mozart.mp3",
         "music/classical/Piano_Sonata_No._15~Beethoven.mp3",
+      ],
+    },
+    {
+      name: "Nature",
+      background: "../img/background/nature_lake.jpg",
+      imgSrc: "https://www.nature.org/en-us/about-us/where-we-work/europe/",
+      imgAuthor: "Ken Geiger",
+      playlist: [
+        "music/nature/Waves.mp3",
+        "music/nature/River.mp3",
+        "music/nature/Countryside.mp3",
       ],
     },
     // Add more themes as needed
