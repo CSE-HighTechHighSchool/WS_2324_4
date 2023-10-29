@@ -81,15 +81,14 @@ body {
 
 /* Text gradient and font size */
 .landing-hero h1 {
-  font-size: 3.5rem;
-  font-weight: 800;
+  font-size: calc(2.2rem + 1vw);
   background: linear-gradient(121deg, #FA00FF 0%, #FFCB00 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Font size for text underneath hero title */
+/* Font size for description underneath hero title */
 .description {
   font-size: 1.05rem;
 }
@@ -334,6 +333,7 @@ main {
   z-index: 1;
 }
 
+/* Description underneath tools title */
 .tools-hero p {
   max-width: 480px;
 }
