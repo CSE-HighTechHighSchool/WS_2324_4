@@ -105,6 +105,10 @@ body {
   max-width: 640px;
 }
 
+.img-50 {
+  max-width: 50%;
+}
+
 /* Highlight image */
 #supercharge {
   position: relative;
@@ -113,7 +117,7 @@ body {
 }
 
 #supercharge::before {
-  filter: hue-rotate(80deg);
+  filter: hue-rotate(170deg);
   content: '';
   display: block;
   position: absolute;
@@ -237,7 +241,6 @@ body {
   font-size: 10px;
 }
 
-
 .audio-player-container:hover .song-info-container {
   opacity: 1;
   transform: translateY(-10px);
@@ -299,11 +302,34 @@ main {
   padding: 6rem 0 2rem;
   background-image: url("img/tools.png");
   background-size: cover;
-  background-position: center;
+  background-position: 75% center;
   background-repeat: no-repeat;
   height: 500px;
   padding-top: 200px;
+  position: relative;
+  z-index: 1;
 }
+
+.tools-hero p {
+  max-width: 480px;
+}
+
+/* Black gradient to create contrast between text and image */
+.tools-hero::after {
+  content: '';
+  position: absolute;
+  display: block;
+  inset: 0;
+  background: linear-gradient(to right, #0000009c, #0000009c);
+  z-index: -1;
+}
+
+@media only screen and (min-width: 1200px) {
+  .tools-hero::after {
+    background: linear-gradient(to right, #0000009c 0%, #00000089 40%, transparent 89%, transparent 100%);
+  }
+}
+
 
 section.tools h2 {
   margin-top: 4rem;
