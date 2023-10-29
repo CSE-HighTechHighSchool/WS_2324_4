@@ -23,6 +23,7 @@
 /* Set default font-family */
 body {
   font-family: "DM Sans", sans-serif !important;
+  overflow-x: hidden;
 }
 
 /* ----------------------- Navigation bar ----------------------- */
@@ -93,23 +94,39 @@ body {
   color: rgba(255, 255, 255, 0.6);
 }
 
-#supercharge {
-  background-image: url("img/yellow-highlight.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 200px;
-  padding-top: 50px;
-}
 
 /* Value proposition section */
 .val-prop {
   background: var(--bg-val-prop);
-  padding: 100px;
+  padding: 100px 0;
 }
 
 .val-prop h1 {
   max-width: 640px;
+}
+
+/* Highlight image */
+#supercharge {
+  position: relative;
+  margin: 80px 0 40px;
+  z-index: 1;
+}
+
+#supercharge::before {
+  filter: hue-rotate(80deg);
+  content: '';
+  display: block;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url("img/yellow-highlight.png");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 150%; 
+  height: 400%;
+  z-index: -1;
 }
 
 /* Pricing section */
