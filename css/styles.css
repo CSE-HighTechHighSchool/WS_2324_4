@@ -59,7 +59,7 @@ body {
 #cloud {
   position: absolute;
   top: 5px;
-  width: 35%;   
+  width: 80%;   
   animation: cloud-animation 20s linear infinite;
 }
 
@@ -95,12 +95,20 @@ body {
     background-image: url("../img/mountain-mobile.png");
     background-size: 85%;
   }
+
+  #cloud {
+    width: 50%;   
+  }
 }
 
 @media only screen and (min-width: 992px) {
   .landing-hero {
     background-image: url("../img/mountain.png");
     background-size: 70%;
+  }
+
+  #cloud {
+    width: 30%;   
   }
 }
 
