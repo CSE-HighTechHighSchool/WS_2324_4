@@ -140,7 +140,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // Change playlist
     playlist = currentTheme.playlist;
     currentSong = 0;
-    playNewSong();
+    pauseMusic();
+    audioPlayer.src = playlist[currentSong];
+    updateSongInfo();
   }
 
   // When next button is clicked, move to next song abd play the song
