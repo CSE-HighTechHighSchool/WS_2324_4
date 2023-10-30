@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GPA Squared</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+      defer
+    ></script>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>    
+    <nav
+      class="navbar-color navbar fixed-top navbar-expand-lg navbar-dark nb-background-color"
+    >
+      <!-- lg = large breakpoint, nb-background-color = purple background color -->
+      <div class="container">
+        <a href="index.html" class="navbar-brand">
+          <img
+            src="img/gpa_saver.svg"
+            alt="GPA Saver Squared Logo"
+            class="d-inline-block w-75"
+          />
+        </a>
+
+        <!-- Hamburger Menu Button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navmenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible navbar menu with custom hover underline CSS animation -->
+        <div class="collapse navbar-collapse" id="navmenu">
+          <!-- Links to hamburger menu button -->
+          <ul class="navbar-nav ms-auto align-items-center">
+            <!-- ms-auto is margin spacing-->
+            <li class="nav-item">
+              <a href="tools.html" class="nav-link nbMenuItem">Tools</a>
+            </li>
+            <li class="nav-item">
+              <a href="sounds.html" class="nav-link nbMenuItem">Sounds</a>
+            </li>
+            <li class="nav-item">
+              <a href="login.html" class="nav-link nbMenuItem">Login</a>
+            </li>
+            <li class="nav-item">
+              <a href="signup.html" class="nav-btn nbMenuItem">
+                <!-- nav-btn = custom class for margin -->
+                <button class="btn btn-light rounded-pill py-1">Sign Up</button>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6 mt-6">
+                    <div class="card p-5">
+                        <div class="card-body">
+                            <h5 class="card-title text-center">Login</h5>
+                            <br>
+                            <form>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+                                    <br>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                    <br>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-dark rounded-pill px-3">Login</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="d-flex flex-column flex-md-row pt-5 pb-3 justify-content-between">
+          <!-- w-max-content = custom class to set width to max-content -->
+          <div class="w-max-content mx-auto mx-md-0 mb-3 mb-md-0">
+            <img
+              src="img/gpa_saver.svg"
+              alt="GPA Saver Squared Logo"
+              class="logo"
+            />
+          </div>
+          <div class="w-max-content d-flex justify-content-end align-items-center mx-auto mx-md-0">
+            <ul class="list-inline my-0">
+              <li class="list-inline-item"><a href="index.html">Home</a></li>
+              <li class="list-inline-item"><a href="tools.html">Tools</a></li>
+              <li class="list-inline-item"><a href="sounds.html">Sounds</a></li>
+              <li class="list-inline-item"><a href="signup.html">Sign Up</a></li>
+            </ul>
+          </div>
+        </div>
+        <p class="w-max-content text-light opacity-50 mb-0 pb-5 mx-auto mx-md-0">Copyright © 2023 GPA Saver </p>
+      </div>
+    </footer>
+    <script src="js/navbar.js"></script>
+  </body>
+</html>
