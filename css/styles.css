@@ -146,6 +146,14 @@ body {
   max-width: 50%;
 }
 
+#sounds-section {
+  background-image: url("../img/water-effect.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+}
+
 /* Highlight image */
 #supercharge {
   position: relative;
