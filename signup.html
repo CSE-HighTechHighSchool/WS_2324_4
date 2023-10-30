@@ -23,7 +23,7 @@
     ></script>
     <link rel="stylesheet" href="css/styles.css" />
   </head>
-  <body>    
+  <body>
     <nav
       class="navbar-color navbar fixed-top navbar-expand-lg navbar-dark nb-background-color"
     >
@@ -73,36 +73,38 @@
     </nav>
 
     <main>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 mt-6">
-                    <div class="card p-5">
-                        <div class="card-body">
-                            <h5 class="card-title text-center">Sign Up</h5>
-                            <br>
-                            <form>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="email" name="email" placeholder="Email">
-                                    <br>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                                    <br>
-                                </div>
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-dark rounded-pill px-3">Sign Up</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+      <div class="container">
+        <div class="d-flex justify-content-center">
+          <div class="login-card p-5">
+            <div>
+              <h4 class="text-center fw-bold">Sign Up</h4>
+              <br />
+              <form>
+                <div class="form-group">
+                  <input type="text" class="form-control" id="email" name="email" placeholder="Email"/>
+                  <br />
                 </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" id="password" name="password" placeholder="Password"/>
+                  <br />
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-dark rounded-pill px-3">
+                    Sign Up
+                  </button>
+                </div>
+              </form>
             </div>
+          </div>
         </div>
+      </div>
     </main>
 
     <footer>
       <div class="container">
-        <div class="d-flex flex-column flex-md-row pt-5 pb-3 justify-content-between">
+        <div
+          class="d-flex flex-column flex-md-row pt-5 pb-3 justify-content-between"
+        >
           <!-- w-max-content = custom class to set width to max-content -->
           <div class="w-max-content mx-auto mx-md-0 mb-3 mb-md-0">
             <img
@@ -111,17 +113,25 @@
               class="logo"
             />
           </div>
-          <div class="w-max-content d-flex justify-content-end align-items-center mx-auto mx-md-0">
+          <div
+            class="w-max-content d-flex justify-content-end align-items-center mx-auto mx-md-0"
+          >
             <ul class="list-inline my-0">
               <li class="list-inline-item"><a href="index.html">Home</a></li>
               <li class="list-inline-item"><a href="tools.html">Tools</a></li>
               <li class="list-inline-item"><a href="sounds.html">Sounds</a></li>
               <li class="list-inline-item"><a href="login.html">Login</a></li>
-              <li class="list-inline-item"><a href="signup.html">Sign Up</a></li>
+              <li class="list-inline-item">
+                <a href="signup.html">Sign Up</a>
+              </li>
             </ul>
           </div>
         </div>
-        <p class="w-max-content text-light opacity-50 mb-0 pb-5 mx-auto mx-md-0">Copyright © 2023 GPA Saver </p>
+        <p
+          class="w-max-content text-light opacity-50 mb-0 pb-5 mx-auto mx-md-0"
+        >
+          Copyright © 2023 GPA Saver
+        </p>
       </div>
     </footer>
     <script src="js/navbar.js"></script>

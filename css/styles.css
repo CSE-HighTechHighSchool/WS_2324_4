@@ -7,10 +7,10 @@
   --bg-pricing: #19005a; /* Background color for pricing section in landing page */
   --bg-tools: #d8cef5;
   
-  --button: #7a20bf;
-  --button-hover: #9938e3;
-  --bg-accent: white;
-  
+  --button: #7a20bf;        /* Button bg color */
+  --button-hover: #9938e3;  /* Button bg hover color */
+
+  --navbar-height: 58.4px; /* Height of navbar (used for padding calculations) */
 }
 
 /* Reset types */
@@ -24,6 +24,12 @@
 body {
   font-family: "DM Sans", sans-serif !important;
   overflow-x: hidden;
+}
+
+/* Main content for page */
+main {
+  background-color: var(--bg-tools);
+  padding: calc(5rem + var(--navbar-height)) 0 5rem;
 }
 
 /* ----------------------- Navigation bar ----------------------- */
@@ -391,9 +397,8 @@ footer li + li {
 }
 
 /* Light purple background */
-main {
-  background-color: var(--bg-tools);
-  padding-bottom: 5rem;
+main.tools {
+  padding-top: 0;
 }
 
 /* Hero text and image */
@@ -462,6 +467,14 @@ section.tools h2 {
   background-color: rgba(255, 255, 255, 0.85);
 }
 
+/* ----------------------- Sign up and login page ----------------------- */
+/* Card that contains form inputs */
+.login-card {
+  background-color: #f3eeff;
+  border: 1px #cbc0e5 solid;
+  max-width: 450px;
+  border-radius: 1.5rem;
+}
 
 /* ----------------------- Adding to Bootstrap styles ----------------------- */
 .container {
@@ -483,4 +496,8 @@ section.tools h2 {
 
 .ghost-btn:hover, .ghost-btn:active, .ghost-btn:focus {
   color: rgba(255, 255, 255, 1) !important;
+}
+
+a {
+  text-decoration: none;
 }
