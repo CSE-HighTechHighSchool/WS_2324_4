@@ -463,10 +463,16 @@ section.tools h2 {
 }
 
 /* ----------------------- Sign up and login page ----------------------- */
+/* Page radial gradient */
+main.login {
+  background-image: radial-gradient(circle at 10% 20%, #d0a8f1, transparent 70%),
+                    radial-gradient(circle at 90% 80%, #88d5ff, transparent 70%);
+}
+
 /* Card that contains form inputs */
 .login-card {
-  background-color: #f3eeff;
-  border: 1px #cbc0e5 solid;
+  background-color: #ffffff81;
+  border: 1px #d2d2d2 solid;
   max-width: 450px;
   border-radius: 1.5rem;
 }
