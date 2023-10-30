@@ -439,6 +439,7 @@ section.tools h2 {
   margin-top: 4rem;
 }
 
+/* Tool feature cards */
 .tools-grid {
   display: grid;
   gap: 10px;
@@ -448,12 +449,6 @@ section.tools h2 {
 @media only screen and (min-width: 576px) {
   .tools-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .tools-grid {
-    grid-template-columns: repeat(3, 1fr);
   }
 }
 
