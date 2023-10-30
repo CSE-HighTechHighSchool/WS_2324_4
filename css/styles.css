@@ -488,6 +488,11 @@ main.login {
   border-radius: 1.5rem;
 }
 
+.login-card form p {
+  color: #00000085;
+  font-size: 0.85rem;
+}
+
 /* ----------------------- Adding to Bootstrap styles ----------------------- */
 .container {
   padding: 0 1rem;
