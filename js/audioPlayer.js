@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
       name: "Lofi",
       background: "../img/background/lofi_anime.jpg",
       imgSrc:
-        "https://www.freepik.com/free-ai-image/cartoon-lofi-young-manga-style-girl-studying-while-listening-music-raining-street-ai-generative_43227423.htm#query=lofi%20anime&position=0&from_view=keyword&track=ais",
+        "https://www.freepik.com/free-ai-image/cartoon-lofi-young-manga-style-girl-studying-while-listening-music-raining-street-ai-generative_43227423.htm",
       imgAuthor: "chandlervid85",
       playlist: [
         "music/lofi/Silent_Wood~Purrple_Cat.mp3",
@@ -35,6 +35,36 @@ document.addEventListener("DOMContentLoaded", function () {
         "music/nature/Countryside.mp3",
       ],
     },
+    {
+      name: "Fireplace",
+      background: "../img/background/fireplace.jpg",
+      imgSrc: "https://wall.alphacoders.com/big.php?i=1193723",
+      imgAuthor: "robokoboto",
+      playlist: [
+        "music/fireplace/Fireplace.mp3"
+      ],
+    },
+    {
+      name: "Rainstorm",
+      background: "../img/background/rainstorm.jpg",
+      imgSrc: "https://www.youtube.com/watch?v=hUs-YL_ddt8",
+      imgAuthor: "Calmed By Nature",
+      playlist: [
+        "music/rainstorm/Rain.mp3",
+        "music/rainstorm/Thunder.mp3"
+      ],
+    },
+    {
+      name: "Coffee Shop",
+      background: "../img/background/coffee.jpg",
+      imgSrc: "https://www.youtube.com/watch?v=DyJTVkRP1vY",
+      imgAuthor: "Relaxing Jazz Piano",
+      playlist: [
+        "music/coffee/George_Street_Shuffle~Kevin_MacLeod.mp3",
+        "music/coffee/Lobby_Time~Kevin_MacLeod.mp3",
+        "music/coffee/On_Hold_For_You~Kevin_MacLeod.mp3"
+      ],
+    },
     // Add more themes as needed
   ];
 
@@ -47,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var imgCredit = document.getElementById("img-credit");          // Credit for background image
 
   // State variables
-  var currentThemeIndex = 0;                // 0 = Lofi, 1 = Classical, 2 = Nature
+  var currentThemeIndex = 0;                // 0 = Lofi, 1 = Classical, 2 = Nature, 3 = Fireplace, 4 = Rainstorm, 5 = Coffee Shop
   var playing = false;                      // If audio is playing or not
   var playlist = themes[0].playlist;        // Playlist array
   var currentSong = 0;                      // Song index in the playlist
@@ -91,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
     playing = false;
   }
   
-  // Apply the theme and start playing the first song
+  // Apply the theme
   function applyTheme() {
     // currentTheme = an object with all the data for the theme
     let currentTheme = themes[currentThemeIndex];
@@ -107,10 +137,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // Update theme button text to display current theme name
     changeThemeBtn.textContent = "Theme: " + themes[currentThemeIndex].name;
 
-    // Change playlist and play the first song
+    // Change playlist
     playlist = currentTheme.playlist;
     currentSong = 0;
-    playNewSong();
+    pauseMusic();
+    audioPlayer.src = playlist[currentSong];
+    updateSongInfo();
   }
 
   // When next button is clicked, move to next song abd play the song
