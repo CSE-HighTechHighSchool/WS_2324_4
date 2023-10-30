@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  // Theme background
   var themes = [
     {
       name: "Lofi",
@@ -23,6 +24,17 @@ document.addEventListener("DOMContentLoaded", function () {
         "music/classical/Piano_Sonata_No._15~Beethoven.mp3",
       ],
     },
+    {
+      name: "Nature",
+      background: "../img/background/nature_lake.jpg",
+      imgSrc: "https://www.nature.org/en-us/about-us/where-we-work/europe/",
+      imgAuthor: "Ken Geiger",
+      playlist: [
+        "music/nature/Waves.mp3",
+        "music/nature/River.mp3",
+        "music/nature/Countryside.mp3",
+      ],
+    },
     // Add more themes as needed
   ];
 
@@ -35,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var imgCredit = document.getElementById("img-credit");          // Credit for background image
 
   // State variables
-  var currentThemeIndex = 0;                // 0 = Lofi, 1 = Classical
+  var currentThemeIndex = 0;                // 0 = Lofi, 1 = Classical, 2 = Nature
   var playing = false;                      // If audio is playing or not
   var playlist = themes[0].playlist;        // Playlist array
   var currentSong = 0;                      // Song index in the playlist
@@ -79,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
     playing = false;
   }
   
-  // Apply the theme (lofi or classical) and start playing the first song
+  // Apply the theme and start playing the first song
   function applyTheme() {
     // currentTheme = an object with all the data for the theme
     let currentTheme = themes[currentThemeIndex];

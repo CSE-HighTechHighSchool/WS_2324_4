@@ -56,30 +56,6 @@ body {
 
 /* ----------------------- Landing page ----------------------- */
 
-#cloud {
-  position: absolute;
-  top: 5px;
-  width: 80%;   
-  animation: cloud-animation 20s linear infinite;
-}
-
-@keyframes cloud-animation {
-  0% {
-    left: 0;
-    opacity: 0;
-  }
-  30% {
-    opacity: 0.2;
-  }
-  70% {
-    opacity: 0.2;
-  }
-  100% {
-    left: 100%;
-    opacity: 0;
-  }
-}
-
 /* Hero section in the landing page */
 .landing-hero {
   background-color: var(--bg-hero);
@@ -109,6 +85,41 @@ body {
 
   #cloud {
     width: 30%;   
+  }
+}
+
+/* Clouds graphic */
+#cloud {
+  --left: -100%; /* Starting position of the clouds */
+  left: var(--left);
+  position: absolute;
+  bottom: 15%;
+  width: 500px;
+  pointer-events: none;
+  user-select: none;
+  animation: cloud-animation 20s linear infinite;
+}
+
+@media only screen and (min-width: 576px) {
+  #cloud {
+    --left: 10%;
+  }
+}
+
+@keyframes cloud-animation {
+  0% {
+    left: var(--left);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.2;
+  }
+  90% {
+    opacity: 0.2;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
   }
 }
 
@@ -179,16 +190,37 @@ body {
 }
 
 .pricing-grid > * {
-  padding: 2rem 3rem;
+  padding: 2rem 2.5rem;
 }
 
-/* Pro Plan */
+/* Basic Plan border */
+.basic-plan {
+  border-radius: 20px;
+  border: 2px rgba(255, 255, 255, 0.4) solid;
+  transition: border 250ms ease;
+}
+
+/* Basic Plan button */
+.basic-plan .btn {
+  border: 2px rgba(255, 255, 255, 0.4) solid;
+}
+
+.basic-plan .btn:hover {
+  border: 2px rgba(255, 255, 255, 0.8) solid;
+}
+
+/* Pro Plan border */
 .pro-plan {
-  position: relative;
   border: solid 3px transparent;
   border-radius: 20px;
   background: linear-gradient(var(--bg-pricing), var(--bg-pricing)) padding-box,
               linear-gradient(to right, #FA00FF 0%, #FFCB00 100%) border-box;
+}
+
+/* Pro plan button */
+.pro-plan .btn {
+  background: linear-gradient(to right, #FA00FF 0%, #FFCB00 100%);
+  border: none;
 }
 
 
@@ -286,7 +318,7 @@ body {
 
 /* Tooltip: Song artist */
 #artist {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 /* Volume slider in tooltip */
@@ -345,7 +377,7 @@ footer li + li {
 
 /* ----------------------- Tools page -----------------------*/
 /* Make navbar initially transparent (will change when user scrolls) */
-#navbar {
+.tools-navbar {
   background-color: transparent;
   transition: background-color 250ms ease-out;
 }
