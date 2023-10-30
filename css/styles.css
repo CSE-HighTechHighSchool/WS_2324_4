@@ -228,12 +228,12 @@ main {
   border: solid 3px transparent;
   border-radius: 20px;
   background: linear-gradient(var(--bg-pricing), var(--bg-pricing)) padding-box,
-              linear-gradient(to right, #FA00FF 0%, #FFCB00 100%) border-box;
+              linear-gradient(120deg, #FA00FF 0%, #FFCB00 100%) border-box;
 }
 
 /* Pro plan button */
 .pro-plan .btn {
-  background: linear-gradient(to right, #FA00FF 0%, #FFCB00 100%);
+  background: linear-gradient(120deg, #FA00FF 0%, #FFCB00 100%);
   border: none;
 }
 
