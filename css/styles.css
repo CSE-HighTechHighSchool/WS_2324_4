@@ -112,6 +112,7 @@ main {
   }
 }
 
+/* Animates clouds to move and fade in/out across the page */
 @keyframes cloud-animation {
   0% {
     left: var(--left);
@@ -434,7 +435,7 @@ main.tools {
   }
 }
 
-
+/* Margins for main headings above tool feature cards */
 section.tools h2 {
   margin-top: 4rem;
 }
