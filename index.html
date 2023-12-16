@@ -22,6 +22,7 @@
       defer
     ></script>
     <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/navbar.js" type="module" defer></script>
   </head>
   <body>
     <nav
@@ -58,13 +59,13 @@
             <li class="nav-item">
               <a href="sounds.html" class="nav-link nbMenuItem">Sounds</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="login-link">
               <a href="login.html" class="nav-link nbMenuItem">Log in</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="signup-link">
               <a href="signup.html" class="nav-btn nbMenuItem">
                 <!-- nav-btn = custom class for margin -->
-                <button class="btn btn-light rounded-pill py-1">Sign Up</button>
+                <button class="btn btn-light rounded-pill py-1">Sign up</button>
               </a>
             </li>
           </ul>
@@ -82,7 +83,7 @@
               We provide a whole catalog of tools and resources to help you study for the next big exam. 
             </p>
             <div class="d-flex">
-              <a href="signup.html"  class="btn btn-light rounded-pill px-3 me-2">Sign Up</a>
+              <a href="signup.html"  class="btn btn-light rounded-pill px-3 me-2">Sign up</a>
               <a href="#val-prop" class="btn ghost-btn rounded-pill px-3">Learn more</a>
               <!-- ghost-btn = custom class for button w/ transparent background -->
             </div>

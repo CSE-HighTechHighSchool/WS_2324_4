@@ -22,7 +22,7 @@
       defer
     ></script>
     <link rel="stylesheet" href="css/styles.css" />
-    <script src="js/navbar.js" defer></script>
+    <script src="js/navbar.js" type="module" defer></script>
   </head>
   <body>
     <nav
@@ -55,18 +55,18 @@
           <ul class="navbar-nav ms-auto align-items-center">
             <!-- ms-auto is margin spacing-->
             <li class="nav-item">
-              <a href="tools.html" class="nav-link nbMenuItem">Tools</a>
+              <a href="#" class="nav-link nbMenuItem">Tools</a>
             </li>
             <li class="nav-item">
               <a href="sounds.html" class="nav-link nbMenuItem">Sounds</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="login-link">
               <a href="login.html" class="nav-link nbMenuItem">Log in</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="signup-link">
               <a href="signup.html" class="nav-btn nbMenuItem">
                 <!-- nav-btn = custom class for margin -->
-                <button class="btn btn-light rounded-pill py-1">Sign Up</button>
+                <button class="btn btn-light rounded-pill py-1">Sign up</button>
               </a>
             </li>
           </ul>

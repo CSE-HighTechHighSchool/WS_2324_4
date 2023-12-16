@@ -26,6 +26,7 @@
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="css/styles.css" />
     <script src="js/signup.js" type="module" defer></script>
+    <script src="js/navbar.js" type="module" defer></script>
   </head>
   <body>
     <nav
@@ -62,13 +63,13 @@
             <li class="nav-item">
               <a href="sounds.html" class="nav-link nbMenuItem">Sounds</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="login-link">
               <a href="login.html" class="nav-link nbMenuItem">Log in</a>
             </li>
-            <li class="nav-item">
-              <a href="signup.html" class="nav-btn nbMenuItem">
+            <li class="nav-item" id="signup-link">
+              <a href="#" class="nav-btn nbMenuItem">
                 <!-- nav-btn = custom class for margin -->
-                <button class="btn btn-light rounded-pill py-1">Sign Up</button>
+                <button class="btn btn-light rounded-pill py-1">Sign up</button>
               </a>
             </li>
           </ul>

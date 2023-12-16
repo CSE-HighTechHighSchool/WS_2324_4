@@ -1,11 +1,19 @@
 // ---------------------- Firebase configuration ----------------------
-
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword }
-  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { getDatabase, ref, set, update, child, get }
-  from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getDatabase,
+  ref,
+  set,
+  update,
+  child,
+  get,
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -17,7 +25,7 @@ const firebaseConfig = {
   projectId: "testproject-cbfc1",
   storageBucket: "testproject-cbfc1.appspot.com",
   messagingSenderId: "906539490157",
-  appId: "1:906539490157:web:7e10a3b01c1501727c9864"
+  appId: "1:906539490157:web:7e10a3b01c1501727c9864",
 };
 
 // Initialize Firebase
@@ -30,11 +38,10 @@ const auth = getAuth();
 const db = getDatabase(app);
 
 // ---------------------- Sign-In User ---------------------------------------//
-
-document.getElementById("signIn").onclick = function() {
+document.getElementById("loginForm").onsubmit = function (e) {
   // Prevent page from refreshing
   e.preventDefault();
-    
+
   // Form data uses the name attribute of input elements
   const formData = new FormData(e.target);
   const data = {};
@@ -51,7 +58,7 @@ document.getElementById("signIn").onclick = function() {
     .then((userCredential) => {
       // Create user credential and store user ID
       const user = userCredential.user;
-      
+
       // Log sign-in date in Database
       // 'Update" function wil only add the last_login infor and won't overwrite everuthing else
       let logDate = new Date();
@@ -67,10 +74,9 @@ document.getElementById("signIn").onclick = function() {
           get(ref(db, "users/" + user.uid + "/accountInfo"))
             .then((snapshot) => {
               if (snapshot.exists()) {
-                console.log(snapshot.val());
-                logIn(snapshot.val());  // logI fucntion will keep user logged in
+                logIn(snapshot.val()); // logI fucntion will keep user logged in
               } else {
-                console.log("User does not exist.")
+                console.log("User does not exist.");
               }
             })
             .catch((error) => {
@@ -79,30 +85,30 @@ document.getElementById("signIn").onclick = function() {
         })
         .catch((error) => {
           // Sign-in failed...
-          alert(error)
+          alert(error);
         });
     })
     .catch((error) => {
       const errorMessage = error.message;
       alert(errorMessage);
     });
-}
+};
 
 // ---------------- Keep User Logged In ----------------------------------
 function logIn(user) {
-  let keepLoggedIn = document.getElementById('keepLoggedInSwitch').ariaChecked;
-  
+  let keepLoggedIn = document.getElementById("keepLoggedInSwitch").checked;
+
   // Session storage is temporary (only while active session)
   // Info saved as a string (must convert to JS object to string)
   // Session stroage will be cleared with a signOut() function in home.js file
   if (!keepLoggedIn) {
     sessionStorage.setItem("user", JSON.stringify(user));
-    location = "home.html";  // Redirect browser to home.html
+    location = "index.html"; // Redirect browser to home.html
   } else {
     // Local storage is permanent (keep user logged in if browser is closed)
     // Local storage will be cleared with signOut() function)
     localStorage.setItem("keepLoggedIn", "yes");
     localStorage.setItem("user", JSON.stringify(user));
-    location = "home.html";  // Redirect browser to home.html
+    location = "index.html"; // Redirect browser to home.html
   }
 }

@@ -22,7 +22,8 @@
       defer
     ></script>
     <link rel="stylesheet" href="css/styles.css" />
-    <script scr="js/login.js" defer></script>
+    <script src="js/login.js" type="module" defer></script>
+    <script src="js/navbar.js" type="module" defer></script>
   </head>
   <body>
     <nav
@@ -59,13 +60,13 @@
             <li class="nav-item">
               <a href="sounds.html" class="nav-link nbMenuItem">Sounds</a>
             </li>
-            <li class="nav-item">
-              <a href="login.html" class="nav-link nbMenuItem">Log in</a>
+            <li class="nav-item" id="login-link">
+              <a href="#" class="nav-link nbMenuItem">Log in</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="signup-link">
               <a href="signup.html" class="nav-btn nbMenuItem">
                 <!-- nav-btn = custom class for margin -->
-                <button id="loginBtn" class="btn btn-light rounded-pill py-1">Sign Up</button>
+                <button id="loginBtn" class="btn btn-light rounded-pill py-1">Sign up</button>
               </a>
             </li>
           </ul>
@@ -80,7 +81,7 @@
             <div>
               <h4 class="text-center fw-bold">Log in</h4>
               <br />
-              <form class="d-flex flex-column gap-2" id="signUpForm">
+              <form class="d-flex flex-column gap-2" id="loginForm">
                 <div class="form-group">
                   <input type="text" class="form-control" id="email" name="email" placeholder="Email"/>
                 </div>
@@ -139,6 +140,5 @@
         </p>
       </div>
     </footer>
-    <script src="js/navbar.js"></script>
   </body>
 </html>
