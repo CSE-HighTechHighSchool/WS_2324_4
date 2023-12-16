@@ -1,10 +1,12 @@
-const navbar = document.getElementById("navbar");
+const navbar = document.getElementById("tools-navbar");
 
 // Make navigation bar solid color if page is scrolled
-document.addEventListener("scroll", (event) => {
-  if (window.scrollY > 0) {
-    navbar.style.backgroundColor = "var(--bg-nav)";
-  } else {
-    navbar.style.backgroundColor = "transparent";
-  }
-});
+if (navbar) {
+  document.addEventListener("scroll", (event) => {
+    if (window.scrollY > 0) {
+      navbar.style.backgroundColor = "var(--bg-nav)";
+    } else {
+      navbar.style.backgroundColor = "transparent";
+    }
+  });
+}
