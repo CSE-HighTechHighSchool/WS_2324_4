@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   var themes = [
     {
       name: "Lofi",
-      background: "../img/background/lofi_anime.jpg",
+      background: "img/background/lofi_anime.jpg",
       imgSrc:
         "https://www.freepik.com/free-ai-image/cartoon-lofi-young-manga-style-girl-studying-while-listening-music-raining-street-ai-generative_43227423.htm",
       imgAuthor: "chandlervid85",
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       name: "Classical",
-      background: "../img/background/classical_piano.webp",
+      background: "img/background/classical_piano.webp",
       imgSrc: "https://wall.alphacoders.com/big.php?i=452391",
       imgAuthor: "miroha",
       playlist: [
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       name: "Nature",
-      background: "../img/background/nature_lake.jpg",
+      background: "img/background/nature_lake.jpg",
       imgSrc: "https://www.nature.org/en-us/about-us/where-we-work/europe/",
       imgAuthor: "Ken Geiger",
       playlist: [
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       name: "Fireplace",
-      background: "../img/background/fireplace.jpg",
+      background: "img/background/fireplace.jpg",
       imgSrc: "https://wall.alphacoders.com/big.php?i=1193723",
       imgAuthor: "robokoboto",
       playlist: [
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       name: "Rainstorm",
-      background: "../img/background/rainstorm.jpg",
+      background: "img/background/rainstorm.jpg",
       imgSrc: "https://www.youtube.com/watch?v=hUs-YL_ddt8",
       imgAuthor: "Calmed By Nature",
       playlist: [
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     {
       name: "Coffee Shop",
-      background: "../img/background/coffee.jpg",
+      background: "img/background/coffee.jpg",
       imgSrc: "https://www.youtube.com/watch?v=DyJTVkRP1vY",
       imgAuthor: "Relaxing Jazz Piano",
       playlist: [
@@ -140,7 +140,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // Change playlist
     playlist = currentTheme.playlist;
     currentSong = 0;
-    playNewSong();
+    pauseMusic();
+    audioPlayer.src = playlist[currentSong];
+    updateSongInfo();
   }
 
   // When next button is clicked, move to next song abd play the song
