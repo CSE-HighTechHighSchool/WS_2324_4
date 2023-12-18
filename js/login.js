@@ -19,13 +19,13 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAPUSbHaXz6-mo12gc1rLjzoJjbfkjusI8",
-  authDomain: "testproject-cbfc1.firebaseapp.com",
-  databaseURL: "https://testproject-cbfc1-default-rtdb.firebaseio.com",
-  projectId: "testproject-cbfc1",
-  storageBucket: "testproject-cbfc1.appspot.com",
-  messagingSenderId: "906539490157",
-  appId: "1:906539490157:web:7e10a3b01c1501727c9864",
+  apiKey: "AIzaSyBaZh0qXFMTkaKvX_08-WtJW4luzUFcirM",
+  authDomain: "gpa-saver-squared.firebaseapp.com",
+  databaseURL: "https://gpa-saver-squared-default-rtdb.firebaseio.com",
+  projectId: "gpa-saver-squared",
+  storageBucket: "gpa-saver-squared.appspot.com",
+  messagingSenderId: "1098242379811",
+  appId: "1:1098242379811:web:97a23ed43e6ce0ab5c2196"
 };
 
 // Initialize Firebase
