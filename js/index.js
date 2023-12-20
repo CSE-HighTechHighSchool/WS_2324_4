@@ -87,7 +87,7 @@ function updatePlan(userID, plan) {
 // Make a plan button say "Current Plan"
 function makeCurrent(elem) {
   elem.textContent = "Current Plan";
-  elem.className = "text-light opacity-50 text-center font-italic";
+  elem.className = "text-light opacity-50 text-center fst-italic";
   elem.style.pointerEvents = "none";
 }
 
