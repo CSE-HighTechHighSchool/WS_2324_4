@@ -110,6 +110,7 @@ document.getElementById("signUpForm").onsubmit = function (e) {
         password: encryptPass(password),
         firstname: firstName,
         lastname: lastName,
+        plan: 'basic'
       })
         .then(() => {
           // Data saved successfully
