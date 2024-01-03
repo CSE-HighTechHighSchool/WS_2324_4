@@ -91,49 +91,53 @@ function makeCurrent(elem) {
   elem.style.pointerEvents = "none";
 }
 
-// ------------------------- Set Welcome Message -------------------------
-getUser();
-if (currentUser !== null) {
-  const basicBtn = document.getElementById("basic");
-  const proBtn = document.getElementById("pro");
-  let plan = await getPlan(currentUser.uid);
-  console.log(plan);
+// --------------------------- Home Page Loading -----------------------------
+window.onload = async function() {
 
-  // Downgrade to Basic Plan
-  basicBtn.href = "#";
-  if (plan === "basic") {
-    makeCurrent(basicBtn);
+  // ------------------------- Set Welcome Message -------------------------
+  getUser();
+  if (currentUser !== null) {
+    const basicBtn = document.getElementById("basic");
+    const proBtn = document.getElementById("pro");
+    let plan = await getPlan(currentUser.uid);
+    console.log(plan);
+
+    // Downgrade to Basic Plan
+    basicBtn.href = "#";
+    if (plan === "basic") {
+      makeCurrent(basicBtn);
+    }
+    basicBtn.onclick = function (e) {
+      e.preventDefault();
+      const userID = currentUser.uid;
+      const success = updatePlan(userID, "basic");
+
+      // Change button to status "Current Plan"
+      makeCurrent(basicBtn);
+
+      // Change pro button back to normal state
+      proBtn.textContent = "Become a pro";
+      proBtn.className = "btn btn-dark rounded-pill px-3";
+      proBtn.style.pointerEvents = "all";
+    };
+
+    // Upgrade to Pro Plan
+    proBtn.href = "#";
+    if (plan === "pro") {
+      makeCurrent(proBtn);
+    }
+    proBtn.onclick = function (e) {
+      e.preventDefault();
+      const userID = currentUser.uid;
+      updatePlan(userID, "pro");
+
+      // Change button to status "Current Plan"
+      makeCurrent(proBtn);
+
+      // Change basic button back to normal state
+      basicBtn.textContent = "Get started for free";
+      basicBtn.className = "btn ghost-btn rounded-pill px-3 d-block";
+      basicBtn.style.pointerEvents = "all";
+    };
   }
-  basicBtn.onclick = function (e) {
-    e.preventDefault();
-    const userID = currentUser.uid;
-    const success = updatePlan(userID, "basic");
-
-    // Change button to status "Current Plan"
-    makeCurrent(basicBtn);
-
-    // Change pro button back to normal state
-    proBtn.textContent = "Become a pro";
-    proBtn.className = "btn btn-dark rounded-pill px-3";
-    proBtn.style.pointerEvents = "all";
-  };
-
-  // Upgrade to Pro Plan
-  proBtn.href = "#";
-  if (plan === "pro") {
-    makeCurrent(proBtn);
-  }
-  proBtn.onclick = function (e) {
-    e.preventDefault();
-    const userID = currentUser.uid;
-    updatePlan(userID, "pro");
-
-    // Change button to status "Current Plan"
-    makeCurrent(proBtn);
-
-    // Change basic button back to normal state
-    basicBtn.textContent = "Get started for free";
-    basicBtn.className = "btn ghost-btn rounded-pill px-3 d-block";
-    basicBtn.style.pointerEvents = "all";
-  };
 }

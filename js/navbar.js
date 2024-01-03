@@ -56,7 +56,7 @@ function getUser() {
   }
 }
 
-// Sign-out function that will remove user info from local/session storage and
+// Sign-out function that will remove user info from local/session storage
 function signOutUser() {
   sessionStorage.removeItem("user");  // Clear session storage
   localStorage.removeItem("user");    // Clear local storage
