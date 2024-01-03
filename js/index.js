@@ -95,7 +95,30 @@ function makeCurrent(elem) {
 window.onload = async function() {
 
   // ------------------------- Set Welcome Message -------------------------
+  const loginLink = document.getElementById("login-link");
+  const signupLink = document.getElementById("signup-link");
+  
   getUser();
+
+  if (currentUser != null) {
+    loginLink.innerHTML = '';
+    const userMessage = document.createElement("div");
+    userMessage.className = "nav-link nbMenuItem";
+    userMessage.style.color = "white";
+    userMessage.textContent = `Hello, ${currentUser.firstname}!`;
+    loginLink.appendChild(userMessage);
+
+    signupLink.innerHTML = '';
+    const logoutButton = document.createElement("button");
+    logoutButton.className = "btn btn-light nav-btn rounded-pill py-1";
+    logoutButton.textContent = "Log out";
+    logoutButton.onclick = function() {
+      signOutUser();
+    }
+    signupLink.appendChild(logoutButton);
+
+  }
+
   if (currentUser !== null) {
     const basicBtn = document.getElementById("basic");
     const proBtn = document.getElementById("pro");
