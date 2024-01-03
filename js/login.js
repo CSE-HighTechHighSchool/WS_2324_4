@@ -65,7 +65,7 @@ document.getElementById("loginForm").onsubmit = function (e) {
           get(ref(db, "users/" + user.uid + "/accountInfo"))
             .then((snapshot) => {
               if (snapshot.exists()) {
-                logIn(snapshot.val()); // logI fucntion will keep user logged in
+                logIn(snapshot.val()); // logIn fucntion will keep user logged in
               } else {
                 console.log("User does not exist.");
               }
