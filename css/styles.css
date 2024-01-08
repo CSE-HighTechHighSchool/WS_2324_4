@@ -399,6 +399,11 @@ footer li + li {
 }
 
 /* ----------------------- Tools page -----------------------*/
+.basic-text, .pro-text {
+  color: rgba(160, 160, 160, 0.85);
+  font-weight: bold;
+}
+
 /* Make navbar initially transparent (will change when user scrolls) */
 .tools-navbar {
   background-color: transparent;
