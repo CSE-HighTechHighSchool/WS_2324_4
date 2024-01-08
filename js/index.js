@@ -91,6 +91,22 @@ function makeCurrent(elem) {
   elem.style.pointerEvents = "none";
 }
 
+// Sign-out function that will remove user info from local/session storage
+function signOutUser() {
+  sessionStorage.removeItem("user");  // Clear session storage
+  localStorage.removeItem("user");    // Clear local storage
+  localStorage.removeItem("keepLoggedIn");
+
+  signOut(auth).then(() => {
+    // Sign-out successful
+  })
+  .catch((error) => {
+    alert("Error: " + error)
+  })
+
+  window.location = "login.html"
+}
+
 // --------------------------- Home Page Loading -----------------------------
 window.onload = async function() {
 
