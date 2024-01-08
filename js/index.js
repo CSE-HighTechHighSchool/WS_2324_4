@@ -1,19 +1,8 @@
 // ----------------- Firebase Setup & Initialization ------------------------//
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import {
-  getAuth,
-  signOut,
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import {
-  getDatabase,
-  ref,
-  set,
-  update,
-  child,
-  get,
-  remove,
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getDatabase, ref, set, update, child, get, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 // Your web app's Firebase configuration
 
@@ -107,6 +96,78 @@ function signOutUser() {
   window.location = "login.html"
 }
 
+
+//----------------------- Create chart for study hours ------------------------------//
+async function createHoursChart() {
+  const studyCtx = document.getElementById("study-hours");
+
+  const studyChart = new Chart(studyCtx, {
+    type: "bar",
+    data: {
+      labels: ["Sat", "Mon", "Tue", "Wed", "Thu", "Fri", "Sun"],
+      datasets: [
+        {
+          data: [1,3,2,5,6,3,2],
+          fill: false,
+          backgroundColor: "rgba(0, 100, 255, 0.5)",
+          borderColor: "rgba(0, 100, 255, 1)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true, // Re-size based on screen size
+      maintainAspectRatio: false,
+      scales: {
+        // Display options for x and y axes
+        x: {
+          title: {
+            display: true,
+            text: "Day", // x-axis title
+            font: {
+              size: 20,
+            },
+          },
+          ticks: {
+            font: {
+              size: 16,
+            },
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: "Hours Studied",
+            font: {
+              size: 20,
+            },
+          },
+          ticks: {
+            font: {
+              size: 12,
+            },
+            maxTicksLimit: 20 // limit # of ticksg
+          },
+        },
+      },
+      plugins: {
+        // Display options
+        title: {
+          display: true,
+          text: "Hours Studied For Each Day in the Month",
+          font: {
+            size: 24,
+          },
+          padding: {
+            top: 10,
+            bottom: 30,
+          },
+        },
+      },
+    },
+  });
+}
+
 // --------------------------- Home Page Loading -----------------------------
 window.onload = async function() {
 
@@ -117,6 +178,8 @@ window.onload = async function() {
   getUser();
 
   if (currentUser != null) {
+
+    // Display name and logout button in the navbar  
     loginLink.innerHTML = '';
     const userMessage = document.createElement("div");
     userMessage.className = "nav-link nbMenuItem";
@@ -133,13 +196,22 @@ window.onload = async function() {
     }
     signupLink.appendChild(logoutButton);
 
-  }
 
-  if (currentUser !== null) {
+    // Welcome message in Hero
+    document.getElementById("welcome").textContent = `Welcome back ${currentUser.firstname}!`;
+
+
+    // Get rid of elements that are only shown when user is logged out
+    let loggedOutElems = document.getElementsByClassName("logged-out");
+    for (let i = 0; i < loggedOutElems.length; i++) {
+      loggedOutElems[i].style.setProperty("display", "none", "important")
+    }
+
+
+    // Plans
     const basicBtn = document.getElementById("basic");
     const proBtn = document.getElementById("pro");
     let plan = await getPlan(currentUser.uid);
-    console.log(plan);
 
     // Downgrade to Basic Plan
     basicBtn.href = "#";

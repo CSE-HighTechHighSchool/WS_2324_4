@@ -70,6 +70,9 @@ main {
   background-size: 100%;
   background-position: right bottom;
   background-repeat: no-repeat;
+  min-height: 34rem;
+  display: flex;
+  align-items: center;
 }
 
 @media only screen and (min-width: 570px) {
@@ -238,6 +241,11 @@ main {
   border: none;
 }
 
+/* Elements displayed when user is logged in */
+.logged-in {
+  background: var(--bg-val-prop);
+  padding: 100px 0;
+}
 
 /* ----------------------- Sounds page ----------------------- */
 /* Canvas for audio visualizer */

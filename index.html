@@ -21,6 +21,7 @@
       crossorigin="anonymous"
       defer
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     <link rel="stylesheet" href="css/styles.css" />
     <script src="js/index.js" type="module" defer></script>
     <!--<script src="js/navbar.js" type="module" defer></script>-->
@@ -79,11 +80,11 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-8 col-lg-6 col-xl-5 text-light">
-            <h1 class="mb-4 fw-bold">Redefining the way you learn and study.</h1>
+            <h1 class="mb-4 fw-bold" id="welcome">Redefining the way you learn and study.</h1>
             <p class="fs-5 mb-4 text-gray">
               We provide a whole catalog of tools and resources to help you study for the next big exam. 
             </p>
-            <div class="d-flex">
+            <div class="d-flex logged-out">
               <a href="signup.html"  class="btn btn-light rounded-pill px-3 me-2">Sign up</a>
               <a href="#val-prop" class="btn ghost-btn rounded-pill px-3">Learn more</a>
               <!-- ghost-btn = custom class for button w/ transparent background -->
@@ -96,7 +97,7 @@
     </section>
   
     <!-- val-prop = custom class to target elements inside value proposition section -->
-    <section id="val-prop" class="val-prop">
+    <section id="val-prop" class="val-prop logged-out">
       <div class="container">
         <!-- Tools Section -->
         <h1 id="supercharge" class="text-center mx-auto fw-bold">
@@ -201,6 +202,13 @@
         </div>
 
         
+      </div>
+    </section>
+
+    <section class="logged-in">
+      <div class="container">
+        <h1 class="mx-auto fw-bold"><i class="bi bi-clock"></i> Track your hours</h1>
+        <canvas id="study-hours"></canvas>
       </div>
     </section>
 
