@@ -106,9 +106,14 @@ document.addEventListener("DOMContentLoaded", function () {
     playMusic()
     updateSongInfo();
   }
+  // Variables for managing the fade effect
+var fadeIn = false;
+var fadeOut = false;
+var fadeAlpha = 0;
 
   // Play music and show pause icon
   function playMusic() {
+    fadeIn = true;
     audioPlayer.play();
     playPauseBtn.innerHTML = '<i class="bi bi-pause"></i>';
     playing = true;
@@ -116,6 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Pause music and show play button
   function pauseMusic() {
+    fadeOut = true;
     audioPlayer.pause();
     playPauseBtn.innerHTML = '<i class="bi bi-play"></i>';
     playing = false;
@@ -244,7 +250,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     for (var i = 0; i < bufferLength; i++) {
       var freqData = dataArray[i] / 255; // Frequency data ranges 0-255; here we normalize the data between 0-1
-      ctx.fillStyle = "rgba(255, 255, 255, 0.5)"; // Color of the bars
+      ctx.fillStyle = "rgba(255, 255, 255, " + fadeAlpha + ")"; // Color of the bars
       var barHeight = (canvas.height * freqData) / 2; // Adjust the height based on loudness at this frequency
       // Create the rectangle (x, y, w, h)
       // It will be centered vertically in the middle of the canvas
@@ -253,6 +259,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // The next rectangle will be positioned to the right by our specified spacing
       xStart += barWidth + barSpacing;
+    }
+    if (fadeIn) {
+      fadeAlpha += 0.01; // Increase opacity gradually
+      if (fadeAlpha >= 0.5) {
+        fadeIn = false;
+      }
+    } else if (fadeOut) {
+      fadeAlpha -= 0.01; // Decrease opacity gradually
+      if (fadeAlpha <= 0) {
+        fadeOut = false;
+      }
     }
 
     requestAnimationFrame(drawVisualizer); // Repeatedly call this function to refresh the canvas
