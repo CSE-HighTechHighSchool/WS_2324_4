@@ -97,17 +97,128 @@ function signOutUser() {
 }
 
 
+
+
+
+
+// -------------------------Update data in database --------------------------
+function updateData(userID, year, month, day, hours) {
+  // Must use brackets around variable name to use it as a key
+  update(ref(db, "users/" + userID + "/data/" + year + "/" + month + "/"), {
+    [day]: hours
+  })
+    .then(() => {
+      alert("Data updated successfully.");
+    })
+    .catch((error) => {
+      alert("There was an error. Error: " + error)
+    });
+}
+
+// -------------------------Delete a day's data from FRD ---------------------
+function deleteData(userID, year, month, day) {
+  remove(ref(db, `users/${userID}/data/${year}/${month}/${day}`))
+    .then(() =>{
+      alert('Data removed successfully.')
+    })
+    .catch((error) => {
+      alert('Unsuccessful, error: ' + error)
+    })
+}
+
+// ----------------------Get a datum from FRD (single data point)---------------
+function getData(userID, year, month, day) {
+  let output = document.getElementById('single-output');
+  let date = document.getElementById('single-date');
+  let result = document.getElementById('single-result');
+
+  const dbref = ref(db);  // Firebase parameter for getting data
+
+  // Provide the paht through the nodes to the data
+  get(child(dbref, `users/${userID}/data/${year}/${month}`))
+    .then((snapshot) => {
+      if (snapshot.exists() && snapshot.val()[day]) {
+        // to get specific value from a key: snapshot.val()[key]
+        output.style.setProperty("display", "block", "important");
+        date.textContent = `${month + 1}/${day}/${year}`;
+        result.textContent = snapshot.val()[day] + " hours";
+      } else {
+        alert("No data found.");
+      }
+    })
+    .catch((error) => {
+      alert("Unsuccessful, error: " + error);
+    })
+}
+
+// ---------------------------Get a month's data set --------------------------
+// Must be an async function because you need to get all the data from FRD
+// before you can process it for a table or graph
+async function getDataSet(userID, year, month) {
+  const days = [];
+  const hours = [];
+
+  const dbref = ref(db);  // Firebase parameter for requesting data
+  
+  // Wait for all data to be pulled from FRD
+  // Must provide the path through the nodes tow the data
+  await get(child(dbref, `users/${userID}/data/${year}/${month}`))
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.val())
+        snapshot.forEach(child => {
+          // Push values to corresponding arrays
+          days.push(parseInt(child.key));
+          hours.push(parseFloat(child.val()));
+        })
+      } else {
+        alert("No data found.");
+        return;
+      }
+    })
+    .catch((error) => {
+      alert("Unsuccessful, error: " + error);
+    });
+  
+  return [days, hours];
+}
+
+
+
+
+
+
+
+
 //----------------------- Create chart for study hours ------------------------------//
-async function createHoursChart() {
+let monthNames = ["January","February","March","April","May","June","July",
+"August","September","October","November","December"];
+
+function fillInData(x, y) {
+  let newX = [];
+  let newY = [];
+  for (let i = 0; i < 31; i++) {
+    newX[i] = i + 1;
+    const index = x.indexOf(i + 1);
+    console.log(index)
+    newY[i] = index !== -1 ? y[index] : 0;
+  }
+  return [newX, newY];
+}
+
+// Creating the chart
+function createHoursChart(year, month, x, y) {
+  let [newX, newY] = fillInData(x, y);
+
   const studyCtx = document.getElementById("study-hours");
 
   const studyChart = new Chart(studyCtx, {
     type: "bar",
     data: {
-      labels: ["Sat", "Mon", "Tue", "Wed", "Thu", "Fri", "Sun"],
+      labels: newX,
       datasets: [
         {
-          data: [1,3,2,5,6,3,2],
+          data: newY,
           fill: false,
           backgroundColor: "rgba(0, 100, 255, 0.5)",
           borderColor: "rgba(0, 100, 255, 1)",
@@ -148,13 +259,15 @@ async function createHoursChart() {
             },
             maxTicksLimit: 20 // limit # of ticksg
           },
+          min: 0,
+          max: 12
         },
       },
       plugins: {
         // Display options
         title: {
           display: true,
-          text: "Hours Studied For Each Day in the Month",
+          text: `Hours Studied For Each Day in ${monthNames[month]} ${year}`,
           font: {
             size: 24,
           },
@@ -163,9 +276,23 @@ async function createHoursChart() {
             bottom: 30,
           },
         },
+        legend: {
+          display: false
+        },
       },
     },
   });
+
+  return studyChart;
+}
+
+function updateChart(chart, year, month, x, y) {
+  let [newX, newY] = fillInData(x, y);
+
+  chart.options.plugins.title.text = `Hours Studied For Each Day in ${monthNames[month]} ${year}`;
+  chart.data.labels = newX;
+  chart.data.datasets[0].data = newY;
+  chart.update();
 }
 
 // --------------------------- Home Page Loading -----------------------------
@@ -207,6 +334,12 @@ window.onload = async function() {
       loggedOutElems[i].style.setProperty("display", "none", "important")
     }
 
+
+    // Display elements that are shown when user is logged in
+    let loggedInElems = document.getElementsByClassName("logged-in");
+    for (let i = 0; i < loggedInElems.length; i++) {
+      loggedInElems[i].style.setProperty("display", "block");
+    }
 
     // Plans
     const basicBtn = document.getElementById("basic");
@@ -250,5 +383,51 @@ window.onload = async function() {
       basicBtn.className = "btn ghost-btn rounded-pill px-3 d-block";
       basicBtn.style.pointerEvents = "all";
     };
+
+
+
+
+
+    let today = new Date();
+    const [days, hours] = await getDataSet(currentUser.uid, today.getFullYear(), today.getMonth());
+    let studyChart = createHoursChart(today.getFullYear(), today.getMonth(), days, hours);
+    console.log(today.getFullYear(), today.getMonth())
+    // document.getElementById("populate").onclick = function() {
+    //   populate(studyChart);
+    // }
+
+    document.getElementById("set-data").onclick = function() {
+      const userID = currentUser.uid;
+      const year = parseInt(document.getElementById("set-year").value);
+      const month = parseInt(document.getElementById("set-month").value);
+      const day = parseInt(document.getElementById("set-day").value);
+      const hours = parseFloat(document.getElementById("set-hours").value);
+      updateData(userID, year, month, day, hours);
+    }
+
+    document.getElementById("del-data").onclick = function() {
+      const userID = currentUser.uid;
+      const year = parseInt(document.getElementById("del-year").value);
+      const month = parseInt(document.getElementById("del-month").value);
+      const day = parseInt(document.getElementById("del-day").value);
+      deleteData(userID, year, month, day);
+    }
+
+    document.getElementById("single-get").onclick = function() {
+      const userID = currentUser.uid;
+      const year = parseInt(document.getElementById("year").value);
+      const month = parseInt(document.getElementById("month").value);
+      const day = parseInt(document.getElementById("day").value);
+      getData(userID, year, month, day);
+    }
+
+    document.getElementById("ds-get").onclick = async function() {
+      const userID = currentUser.uid;
+      const year = parseInt(document.getElementById("ds-year").value);
+      const month = parseInt(document.getElementById("ds-month").value);
+      const [days, hours] = await getDataSet(userID, year, month);
+      updateChart(studyChart, year, month, days, hours);
+    }
+
   }
 }

@@ -242,9 +242,12 @@ main {
 }
 
 /* Elements displayed when user is logged in */
-.logged-in {
+.charts {
   background: var(--bg-val-prop);
   padding: 100px 0;
+}
+.logged-in {
+  display: none;
 }
 
 /* ----------------------- Sounds page ----------------------- */

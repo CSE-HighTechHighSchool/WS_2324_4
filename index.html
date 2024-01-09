@@ -89,6 +89,11 @@
               <a href="#val-prop" class="btn ghost-btn rounded-pill px-3">Learn more</a>
               <!-- ghost-btn = custom class for button w/ transparent background -->
             </div>
+            <div class="d-flex logged-in">
+              <a href="tools.html"  class="btn btn-light rounded-pill px-3 me-2">Explore Tools</a>
+              <a href="sounds.html" class="btn ghost-btn rounded-pill px-3">Listen to Sounds</a>
+              <!-- ghost-btn = custom class for button w/ transparent background -->
+            </div>
           </div>
         </div>
       </div>
@@ -205,10 +210,238 @@
       </div>
     </section>
 
-    <section class="logged-in">
+    <section class="logged-in charts">
       <div class="container">
         <h1 class="mx-auto fw-bold"><i class="bi bi-clock"></i> Track your hours</h1>
-        <canvas id="study-hours"></canvas>
+        <div class="d-flex flex-column flex-xl-row mt-4 gap-4">
+          <div class="flex-grow-1">
+            <h5 class="fw-bold">Set Data</h5>
+            <form>
+              <div class="d-flex flex-row gap-2">
+                <select class="form-select" aria-label="Default select example" id="set-year">
+                  <option selected>Year</option>
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                </select>
+                <select class="form-select" aria-label="Default select example" id="set-month">
+                  <option selected>Month</option>
+                  <option value="0">Jan</option>
+                  <option value="1">Feb</option>
+                  <option value="2">Mar</option>
+                  <option value="3">Apr</option>
+                  <option value="4">May</option>
+                  <option value="5">Jun</option>
+                  <option value="6">Jul</option>
+                  <option value="7">Aug</option>
+                  <option value="8">Sep</option>
+                  <option value="9">Oct</option>
+                  <option value="10">Nov</option>
+                  <option value="11">Dec</option>
+                </select>
+                <select class="form-select" aria-label="Default select example" id="set-day">
+                  <option selected>Day</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  <option value="29">29</option>
+                  <option value="30">30</option>
+                  <option value="31">31</option>
+                </select>
+              </div>
+              <div class="d-flex flex-row gap-2 mt-2">
+                <input class="px-2 rounded form-control" style="max-width: 200px;" type="number" id="set-hours" placeholder="Hours studied" min="0" max="12">
+                <div class="btn btn-dark rounded-pill px-3" id="set-data">Set Data</div>
+              </div>
+            </form>
+          </div>
+          <div class="flex-grow-1">
+            <h5 class="fw-bold">Remove Data</h5>
+            <form>
+              <div class="d-flex flex-row gap-2">
+                <select class="form-select" aria-label="Default select example" id="del-year">
+                  <option selected>Year</option>
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                </select>
+                <select class="form-select" aria-label="Default select example" id="del-month">
+                  <option selected>Month</option>
+                  <option value="0">Jan</option>
+                  <option value="1">Feb</option>
+                  <option value="2">Mar</option>
+                  <option value="3">Apr</option>
+                  <option value="4">May</option>
+                  <option value="5">Jun</option>
+                  <option value="6">Jul</option>
+                  <option value="7">Aug</option>
+                  <option value="8">Sep</option>
+                  <option value="9">Oct</option>
+                  <option value="10">Nov</option>
+                  <option value="11">Dec</option>
+                </select>
+                <select class="form-select" aria-label="Default select example" id="del-day">
+                  <option selected>Day</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  <option value="29">29</option>
+                  <option value="30">30</option>
+                  <option value="31">31</option>
+                </select>
+                <div class="btn btn-dark rounded-pill px-3 flex-grow-1 w-100" id="del-data">Remove Data</div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="d-flex flex-column flex-xl-row mt-4 gap-4">
+          <div class="flex-grow-1">
+            <h5 class="fw-bold">Get Single Day</h5>
+            <form>
+              <div class="d-flex flex-row gap-2">
+                <select class="form-select" aria-label="Default select example" id="year">
+                  <option selected>Year</option>
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                </select>
+                <select class="form-select" aria-label="Default select example" id="month">
+                  <option selected>Month</option>
+                  <option value="0">Jan</option>
+                  <option value="1">Feb</option>
+                  <option value="2">Mar</option>
+                  <option value="3">Apr</option>
+                  <option value="4">May</option>
+                  <option value="5">Jun</option>
+                  <option value="6">Jul</option>
+                  <option value="7">Aug</option>
+                  <option value="8">Sep</option>
+                  <option value="9">Oct</option>
+                  <option value="10">Nov</option>
+                  <option value="11">Dec</option>
+                </select>
+                <select class="form-select" aria-label="Default select example" id="day">
+                  <option selected>Day</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  <option value="29">29</option>
+                  <option value="30">30</option>
+                  <option value="31">31</option>
+                </select>
+                <div class="btn btn-dark rounded-pill px-3 flex-grow-1 w-100" id="single-get">Get Data</div>
+              </div>
+            </form>
+            <div class="mt-2 d-none" id="single-output">On <span id="single-date"></span>, you studied a total of: <span id="single-result" class="fw-bold"></span></div>
+          </div>       
+          <div class="flex-grow-1">
+            <h5 class="fw-bold">Get Month Dataset</h5>
+            <form>
+              <div class="d-flex flex-row gap-2">
+                <select class="form-select w-75" aria-label="Default select example" id="ds-year">
+                  <option selected>Year</option>
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                </select>
+                <select class="form-select" aria-label="Default select example" id="ds-month">
+                  <option selected>Month</option>
+                  <option value="0">Jan</option>
+                  <option value="1">Feb</option>
+                  <option value="2">Mar</option>
+                  <option value="3">Apr</option>
+                  <option value="4">May</option>
+                  <option value="5">Jun</option>
+                  <option value="6">Jul</option>
+                  <option value="7">Aug</option>
+                  <option value="8">Sep</option>
+                  <option value="9">Oct</option>
+                  <option value="10">Nov</option>
+                  <option value="11">Dec</option>
+                </select>
+                <div class="btn btn-dark rounded-pill px-3 flex-grow-1 w-100" id="ds-get">Get Data for Month</div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div style="height: 600px;" class="mt-4">
+          <canvas id="study-hours" style="display: block;"></canvas>
+        </div>
+        <button class="btn btn-dark rounded-pill px-3" id="populate">Populate w/ data</button>
+        
       </div>
     </section>
 
