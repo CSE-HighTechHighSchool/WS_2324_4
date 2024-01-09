@@ -165,7 +165,6 @@ async function getDataSet(userID, year, month) {
   await get(child(dbref, `users/${userID}/data/${year}/${month}`))
     .then((snapshot) => {
       if (snapshot.exists()) {
-        console.log(snapshot.val())
         snapshot.forEach(child => {
           // Push values to corresponding arrays
           days.push(parseInt(child.key));
@@ -200,7 +199,6 @@ function fillInData(x, y) {
   for (let i = 0; i < 31; i++) {
     newX[i] = i + 1;
     const index = x.indexOf(i + 1);
-    console.log(index)
     newY[i] = index !== -1 ? y[index] : 0;
   }
   return [newX, newY];
@@ -390,11 +388,7 @@ window.onload = async function() {
 
     let today = new Date();
     const [days, hours] = await getDataSet(currentUser.uid, today.getFullYear(), today.getMonth());
-    let studyChart = createHoursChart(today.getFullYear(), today.getMonth(), days, hours);
-    console.log(today.getFullYear(), today.getMonth())
-    // document.getElementById("populate").onclick = function() {
-    //   populate(studyChart);
-    // }
+    let studyChart = createHoursChart(today.getFullYear(), today.getMonth(), days, hours);    
 
     document.getElementById("set-data").onclick = function() {
       const userID = currentUser.uid;
