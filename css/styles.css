@@ -275,7 +275,7 @@ main {
   padding: 100px 0;
 }
 .logged-in {
-  display: none;
+  display: none !important;
 }
 
 /* ----------------------- Sounds page ----------------------- */

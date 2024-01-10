@@ -378,7 +378,7 @@ window.onload = async function() {
 
     // Display elements that are shown when user is logged in
     for (let i = 0; i < loggedInElems.length; i++) {
-      loggedInElems[i].style.setProperty("display", "block");
+      loggedInElems[i].style.setProperty("display", "block", "important");
     }
 
     // Plans
@@ -474,7 +474,7 @@ window.onload = async function() {
   }
   else{
     for (let i = 0; i < loggedOutElems.length; i++) {
-      loggedOutElems[i].style.setProperty("display", "block")
+      loggedOutElems[i].style.setProperty("display", "block", "important")
     }
 
 
