@@ -262,9 +262,9 @@ document.addEventListener("DOMContentLoaded", function () {
     updateSongInfo();
   }
   // Variables for managing the fade effect
-var fadeIn = false;
-var fadeOut = false;
-var fadeAlpha = 0;
+  var fadeIn = false;
+  var fadeOut = false;
+  var fadeAlpha = 0;
 
   // Play music and show pause icon
   function playMusic() {
