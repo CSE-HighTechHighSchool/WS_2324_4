@@ -5,7 +5,6 @@ import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/fire
 import { getDatabase, ref, set, update, child, get, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 // Your web app's Firebase configuration
-
 const firebaseConfig = {
   apiKey: "AIzaSyBaZh0qXFMTkaKvX_08-WtJW4luzUFcirM",
   authDomain: "gpa-saver-squared.firebaseapp.com",
@@ -82,10 +81,28 @@ function getUser() {
   }
 }
 
+// Sign-out function that will remove user info from local/session storage
+function signOutUser() {
+  sessionStorage.removeItem("user");  // Clear session storage
+  localStorage.removeItem("user");    // Clear local storage
+  localStorage.removeItem("keepLoggedIn");
+
+  signOut(auth).then(() => {
+    // Sign-out successful
+  })
+  .catch((error) => {
+    customAlert("Error: " + error)
+  })
+
+  window.location = "login.html"
+}
+
 // ----------------------------- Get plan --------------------------
 // Return the user's plan ("basic" or "pro")
 async function getPlan(userID) {
   let plan = null;
+
+  // Provide the path through the nodes to the data
   await get(ref(db, `users/${userID}/accountInfo`))
     .then((snapshot) => {
       if (snapshot.exists()) {
@@ -121,27 +138,6 @@ function makeCurrent(elem) {
   elem.className = "text-light opacity-50 text-center fst-italic";
   elem.style.pointerEvents = "none";
 }
-
-// Sign-out function that will remove user info from local/session storage
-function signOutUser() {
-  sessionStorage.removeItem("user");  // Clear session storage
-  localStorage.removeItem("user");    // Clear local storage
-  localStorage.removeItem("keepLoggedIn");
-
-  signOut(auth).then(() => {
-    // Sign-out successful
-  })
-  .catch((error) => {
-    customAlert("Error: " + error)
-  })
-
-  window.location = "login.html"
-}
-
-
-
-
-
 
 // -------------------------Update data in database --------------------------
 function updateData(userID, year, month, day, hours) {
@@ -223,13 +219,6 @@ async function getDataSet(userID, year, month) {
   
   return [days, hours];
 }
-
-
-
-
-
-
-
 
 //----------------------- Create chart for study hours ------------------------------//
 let monthNames = ["January","February","March","April","May","June","July",
@@ -381,7 +370,7 @@ window.onload = async function() {
       loggedInElems[i].style.setProperty("display", "block", "important");
     }
 
-    // Plans
+    // Get button elements for setting plans
     const basicBtn = document.getElementById("basic");
     const proBtn = document.getElementById("pro");
     let plan = await getPlan(currentUser.uid);
@@ -424,16 +413,14 @@ window.onload = async function() {
       basicBtn.style.pointerEvents = "all";
     };
 
-
-
-
-
     let today = new Date();
     let currentMonth = today.getMonth();
     let currentYear = today.getFullYear();
     const [days, hours] = await getDataSet(currentUser.uid, currentYear, currentMonth);
     let studyChart = createHoursChart(currentYear, currentMonth, days, hours);    
 
+    // Get, update, delete hours studied data in FRD
+    // Update data function call
     document.getElementById("set-data").onclick = async function() {
       const userID = currentUser.uid;
       const year = parseInt(document.getElementById("set-year").value);
@@ -445,6 +432,7 @@ window.onload = async function() {
       updateChart(studyChart, currentYear, currentMonth, daysChart, hoursChart);
     }
 
+    // Delete a single day's data function call
     document.getElementById("del-data").onclick = function() {
       const userID = currentUser.uid;
       const year = parseInt(document.getElementById("del-year").value);
@@ -453,6 +441,7 @@ window.onload = async function() {
       deleteData(userID, year, month, day);
     }
 
+    // Get a datum function call
     document.getElementById("single-get").onclick = function() {
       const userID = currentUser.uid;
       const year = parseInt(document.getElementById("year").value);
@@ -461,6 +450,7 @@ window.onload = async function() {
       getData(userID, year, month, day);
     }
 
+    // Get a data set function call
     document.getElementById("ds-get").onclick = async function() {
       const userID = currentUser.uid;
       const year = parseInt(document.getElementById("ds-year").value);
@@ -472,13 +462,14 @@ window.onload = async function() {
     }
 
   }
-  else{
+  // If viewing homepage while logged out
+  else {
+    // Display elements that are shown when user is logged out
     for (let i = 0; i < loggedOutElems.length; i++) {
       loggedOutElems[i].style.setProperty("display", "block", "important")
     }
 
-
-    // Display elements that are shown when user is logged in
+    // Hide elements that are shown when user is logged in
     for (let i = 0; i < loggedInElems.length; i++) {
       loggedInElems[i].style.setProperty("display", "none", "important");
     }
