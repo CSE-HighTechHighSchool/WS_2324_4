@@ -166,6 +166,7 @@ window.onload = async function() {
     if (currentUser != null) {
       let plan = await getPlan(currentUser.uid);
 
+      // Show unlocked status on basic tools if user has either plan
       if (plan != null) {
         for (let i = 0; i < basicText.length; i++) {
             basicText[i].innerHTML = `<i class="bi bi-check-circle-fill"></i>&nbsp;&nbsp;Basic Plan Feature`;
@@ -173,6 +174,7 @@ window.onload = async function() {
         }
       }
   
+      // Show locked status on pro tools if user has basic plan
       if (plan === "basic") {
         for (let i = 0; i < proText.length; i++) {
             proText[i].innerHTML = `<i class="bi bi-lock-fill"></i>&nbsp;&nbsp;Pro Plan Feature`;
@@ -180,10 +182,12 @@ window.onload = async function() {
         }
       }
   
+      // Show unlocked status on pro tools if user has pro plan
       if (plan === "pro") {
         for (let i = 0; i < proText.length; i++) {
             proText[i].innerHTML = `<i class="bi bi-check-circle-fill"></i>&nbsp;&nbsp;Pro Plan Feature`;
-            proText[i].style.setProperty("opacity", "1");
+
+            // Set custom pro gradient for status text
             proText[i].style.setProperty("background-image", "linear-gradient(120deg, #FA00FF 0%, #FFCB00 60%)");
             proText[i].style.setProperty("background-clip", "text");
             proText[i].style.setProperty("text-fill", "transparent");
