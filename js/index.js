@@ -232,6 +232,7 @@ Chart.defaults.color = '#212529';
 let monthNames = ["January","February","March","April","May","June","July",
 "August","September","October","November","December"];
 
+// Fill in days and hours data so it can be displayed in chart
 function fillInData(x, y) {
   let newX = [];
   let newY = [];
@@ -294,7 +295,7 @@ function createHoursChart(year, month, x, y) {
             font: {
               size: 12,
             },
-            maxTicksLimit: 20 // limit # of ticksg
+            maxTicksLimit: 20 // limit # of ticks
           },
           min: 0,
           max: 12
@@ -304,7 +305,7 @@ function createHoursChart(year, month, x, y) {
         // Display options
         title: {
           display: true,
-          text: `Hours Studied For Each Day in ${monthNames[month]} ${year}`,
+          text: `Daily Hours Studied in ${monthNames[month]} ${year}`,
           font: {
             size: 24,
           },
@@ -323,10 +324,11 @@ function createHoursChart(year, month, x, y) {
   return studyChart;
 }
 
+// Update chart to reflect edits to the data
 function updateChart(chart, year, month, x, y) {
   let [newX, newY] = fillInData(x, y);
 
-  chart.options.plugins.title.text = `Hours Studied For Each Day in ${monthNames[month]} ${year}`;
+  chart.options.plugins.title.text = `Daily Hours Studied in ${monthNames[month]} ${year}`;
   chart.data.labels = newX;
   chart.data.datasets[0].data = newY;
   chart.update();
