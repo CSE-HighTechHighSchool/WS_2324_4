@@ -118,8 +118,8 @@ window.onload = async function() {
 
     // ------------------------- Set Tool Plan Statuses -------------------------
     const basicText = document.getElementsByClassName("basic-text");
+    const proText = document.getElementsByClassName("pro-text");
     const proTools = document.getElementsByClassName("pro-tool");
-    console.log(basicText);
     
     getUser();
   
@@ -127,20 +127,28 @@ window.onload = async function() {
       let plan = await getPlan(currentUser.uid);
 
       if (plan != null) {
-        console.log("hi");
         for (let i = 0; i < basicText.length; i++) {
+            basicText[i].innerHTML = `<i class="bi bi-check-circle-fill"></i>&nbsp;&nbsp;Basic Plan Feature`;
             basicText[i].style.setProperty("color", "rgba(100, 200, 100, 0.85)");
         }
       }
   
       if (plan === "basic") {
-        for (let i = 0; i < proTools.length; i++) {
+        for (let i = 0; i < proText.length; i++) {
+            proText[i].innerHTML = `<i class="bi bi-lock-fill"></i>&nbsp;&nbsp;Pro Plan Feature`;
             proTools[i].style.setProperty("opacity", "0.65");
         }
       }
   
       if (plan === "pro") {
-
+        for (let i = 0; i < proText.length; i++) {
+            proText[i].innerHTML = `<i class="bi bi-check-circle-fill"></i>&nbsp;&nbsp;Pro Plan Feature`;
+            proText[i].style.setProperty("opacity", "1");
+            proText[i].style.setProperty("background-image", "linear-gradient(120deg, #FA00FF 0%, #FFCB00 60%)");
+            proText[i].style.setProperty("background-clip", "text");
+            proText[i].style.setProperty("text-fill", "transparent");
+            proText[i].style.setProperty("color", "transparent");
+        }
       }
     }
 };
