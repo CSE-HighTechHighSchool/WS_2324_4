@@ -43,6 +43,47 @@ const db = getDatabase(app);
 
 let currentUser = null; // Initialize currentUser to null
 
+// Custom alert function
+function customAlert(message) {
+  // Create overlay
+  let overlay = document.createElement('div');
+  overlay.className = 'overlay';
+
+  // Create popup
+  let popup = document.createElement('div');
+  popup.className = 'popup';
+
+  // Add message to popup
+  popup.innerText = message;
+
+  // Create close button
+  let closeButton = document.createElement('button');
+  closeButton.className = 'closeButton btn btn-dark rounded-pill';
+  closeButton.textContent = 'x';
+
+  // Add event listener to close button and overlay
+  closeButton.addEventListener('click', function() {
+    document.body.removeChild(overlay);
+  });
+
+  overlay.addEventListener('click', function() {
+    document.body.removeChild(overlay);
+  });
+
+  // Prevent event propagation to overlay when popup is clicked
+  popup.addEventListener('click', function(event) {
+    event.stopPropagation();
+  });
+
+  // Add close button to popup
+  popup.appendChild(closeButton);
+
+  // Add popup to overlay
+  overlay.appendChild(popup);
+
+  // Add overlay to body
+  document.body.appendChild(overlay);
+}
 //----------------------- Get User Object ------------------------------//
 function getUser() {
   // Grab value for the 'keep logged in' switch
@@ -66,7 +107,7 @@ function signOutUser() {
     // Sign-out successful
   })
   .catch((error) => {
-    alert("Error: " + error)
+    customAlert("Error: " + error)
   })
 
   window.location = "login.html"
