@@ -28,12 +28,8 @@ const auth = getAuth();
 // Returns instance of your apps' FRD
 const db = getDatabase(app);
 
-// --------------- Check for null, empty ("") or all spaces only ------------//
-function isEmptyorSpaces(str) {
-  return str === null || str.match(/^ *$/) !== null;
-}
 // Custom alert function
-function customAlert(message) {
+function customAlert(message, redirect = false) {
   // Create overlay
   let overlay = document.createElement('div');
   overlay.className = 'overlay';
@@ -53,10 +49,16 @@ function customAlert(message) {
   // Add event listener to close button and overlay
   closeButton.addEventListener('click', function() {
     document.body.removeChild(overlay);
+    if (redirect) {
+      location = "login.html"; // Redirect browser to login.html
+    }
   });
 
   overlay.addEventListener('click', function() {
     document.body.removeChild(overlay);
+    if (redirect) {
+      location = "login.html"; // Redirect browser to login.html
+    }
   });
 
   // Prevent event propagation to overlay when popup is clicked
@@ -73,6 +75,12 @@ function customAlert(message) {
   // Add overlay to body
   document.body.appendChild(overlay);
 }
+
+// --------------- Check for null, empty ("") or all spaces only ------------//
+function isEmptyorSpaces(str) {
+  return str === null || str.match(/^ *$/) !== null;
+}
+
 // ---------------------- Validate Registration Data -----------------------//
 function validation(firstName, lastName, email, password) {
   let fNameRegex = /^[a-zA-Z]+$/;
@@ -154,8 +162,7 @@ document.getElementById("signUpForm").onsubmit = function (e) {
       })
         .then(() => {
           // Data saved successfully
-          customAlert("User created succesfully!");
-          location = "/login.html"; // Redirect to login page
+          customAlert("User created succesfully!", true);
         })
         .catch((error) => {
           // The write failed...
