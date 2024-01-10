@@ -436,6 +436,16 @@ footer li + li {
   color: rgba(160, 160, 160, 0.85);
   font-weight: bold;
 }
+.basic-text:hover {
+  color: rgba(100, 200, 100, 0.85);
+  transition: color 250ms ease;
+}
+.pro-text:hover {
+  background-image: linear-gradient(120deg, #FA00FF 0%, #FFCB00 60%);
+  background-clip: text;
+  color: transparent;
+  transition: color 250ms ease;
+}
 
 /* Make navbar initially transparent (will change when user scrolls) */
 .tools-navbar {

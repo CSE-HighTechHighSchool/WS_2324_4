@@ -172,7 +172,7 @@ function getData(userID, year, month, day) {
 
   const dbref = ref(db);  // Firebase parameter for getting data
 
-  // Provide the paht through the nodes to the data
+  // Provide the path through the nodes to the data
   get(child(dbref, `users/${userID}/data/${year}/${month}`))
     .then((snapshot) => {
       if (snapshot.exists() && snapshot.val()[day]) {
@@ -192,7 +192,7 @@ function getData(userID, year, month, day) {
 // ---------------------------Get a month's data set --------------------------
 // Must be an async function because you need to get all the data from FRD
 // before you can process it for a table or graph
-async function getDataSet(userID, year, month) {
+async function getDataSet(userID, year, month, showAlert = true) {
   const days = [];
   const hours = [];
 
@@ -209,18 +209,26 @@ async function getDataSet(userID, year, month) {
           hours.push(parseFloat(child.val()));
         })
       } else {
-        customAlert("No data found.");
+        if (showAlert) {
+          customAlert("No data found.");
+        }
         return;
       }
     })
     .catch((error) => {
-      customAlert("Unsuccessful, error: " + error);
+      if (showAlert) {
+        customAlert("Unsuccessful, error: " + error);
+      }
     });
   
   return [days, hours];
 }
 
 //----------------------- Create chart for study hours ------------------------------//
+// Set default font family and color for chart
+Chart.defaults.font.family = 'DM Sans';
+Chart.defaults.color = '#212529';
+
 let monthNames = ["January","February","March","April","May","June","July",
 "August","September","October","November","December"];
 
@@ -413,10 +421,13 @@ window.onload = async function() {
       basicBtn.style.pointerEvents = "all";
     };
 
+    // Get variables so that chart by default displays current month and year upon page load
     let today = new Date();
     let currentMonth = today.getMonth();
     let currentYear = today.getFullYear();
-    const [days, hours] = await getDataSet(currentUser.uid, currentYear, currentMonth);
+
+    // showAlert set to false to avoid alerts upon page load if user has no data for current month
+    const [days, hours] = await getDataSet(currentUser.uid, currentYear, currentMonth, false);
     let studyChart = createHoursChart(currentYear, currentMonth, days, hours);    
 
     // Get, update, delete hours studied data in FRD
@@ -428,17 +439,19 @@ window.onload = async function() {
       const day = parseInt(document.getElementById("set-day").value);
       const hours = parseFloat(document.getElementById("set-hours").value);
       updateData(userID, year, month, day, hours);
-      const [daysChart, hoursChart] = await getDataSet(userID, currentYear, currentMonth);
+      const [daysChart, hoursChart] = await getDataSet(userID, currentYear, currentMonth, false);
       updateChart(studyChart, currentYear, currentMonth, daysChart, hoursChart);
     }
 
     // Delete a single day's data function call
-    document.getElementById("del-data").onclick = function() {
+    document.getElementById("del-data").onclick = async function() {
       const userID = currentUser.uid;
       const year = parseInt(document.getElementById("del-year").value);
       const month = parseInt(document.getElementById("del-month").value);
       const day = parseInt(document.getElementById("del-day").value);
       deleteData(userID, year, month, day);
+      const [daysChart, hoursChart] = await getDataSet(userID, currentYear, currentMonth, false);
+      updateChart(studyChart, currentYear, currentMonth, daysChart, hoursChart);
     }
 
     // Get a datum function call
@@ -462,6 +475,7 @@ window.onload = async function() {
     }
 
   }
+
   // If viewing homepage while logged out
   else {
     // Display elements that are shown when user is logged out
