@@ -440,9 +440,15 @@ window.onload = async function() {
       const month = parseInt(document.getElementById("set-month").value);
       const day = parseInt(document.getElementById("set-day").value);
       const hours = parseFloat(document.getElementById("set-hours").value);
-      updateData(userID, year, month, day, hours);
-      const [daysChart, hoursChart] = await getDataSet(userID, currentYear, currentMonth, false);
-      updateChart(studyChart, currentYear, currentMonth, daysChart, hoursChart);
+      if(!isNaN(year) && !isNaN(month) && !isNaN(day) && !isNaN(hours))
+      {
+        updateData(userID, year, month, day, hours);
+        const [daysChart, hoursChart] = await getDataSet(userID, currentYear, currentMonth, false);
+        updateChart(studyChart, currentYear, currentMonth, daysChart, hoursChart);
+      }
+      else{
+        customAlert("Please enter all fields"); 
+      }
     }
 
     // Delete a single day's data function call
@@ -451,9 +457,15 @@ window.onload = async function() {
       const year = parseInt(document.getElementById("del-year").value);
       const month = parseInt(document.getElementById("del-month").value);
       const day = parseInt(document.getElementById("del-day").value);
-      deleteData(userID, year, month, day);
-      const [daysChart, hoursChart] = await getDataSet(userID, currentYear, currentMonth, false);
-      updateChart(studyChart, currentYear, currentMonth, daysChart, hoursChart);
+      if(!isNaN(year) && !isNaN(month) && !isNaN(day))
+      {
+        deleteData(userID, year, month, day);
+        const [daysChart, hoursChart] = await getDataSet(userID, currentYear, currentMonth, false);
+        updateChart(studyChart, currentYear, currentMonth, daysChart, hoursChart);
+      }
+      else{
+        customAlert("Please enter all fields");
+      }
     }
 
     // Get a datum function call
@@ -462,7 +474,13 @@ window.onload = async function() {
       const year = parseInt(document.getElementById("year").value);
       const month = parseInt(document.getElementById("month").value);
       const day = parseInt(document.getElementById("day").value);
-      getData(userID, year, month, day);
+      if(!isNaN(year) && !isNaN(month) && !isNaN(day))
+      {
+        getData(userID, year, month, day);
+      }
+      else{
+        customAlert("Please enter all fields");
+      }
     }
 
     // Get a data set function call
@@ -470,10 +488,16 @@ window.onload = async function() {
       const userID = currentUser.uid;
       const year = parseInt(document.getElementById("ds-year").value);
       const month = parseInt(document.getElementById("ds-month").value);
-      const [days, hours] = await getDataSet(userID, year, month);
-      updateChart(studyChart, year, month, days, hours);
-      currentMonth = month;
-      currentYear = year;
+      if(!isNaN(year) && !isNaN(month))
+      {
+        const [days, hours] = await getDataSet(userID, year, month);
+        updateChart(studyChart, year, month, days, hours);
+        currentMonth = month;
+        currentYear = year;
+      }
+      else{
+        customAlert("Please enter all fields");
+      }
     }
 
   }
