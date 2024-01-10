@@ -160,6 +160,7 @@ window.onload = async function() {
     const basicText = document.getElementsByClassName("basic-text");
     const proText = document.getElementsByClassName("pro-text");
     const proTools = document.getElementsByClassName("pro-tool");
+    const basicTools = document.getElementsByClassName("basic-tool");
     
     getUser();
   
@@ -193,6 +194,15 @@ window.onload = async function() {
             proText[i].style.setProperty("text-fill", "transparent");
             proText[i].style.setProperty("color", "transparent");
         }
+      }
+    }
+    else{
+      // Show locked status on all tools if user is not logged in
+      for (let i = 0; i < proText.length; i++) {
+        proText[i].innerHTML = `<i class="bi bi-lock-fill"></i>&nbsp;&nbsp;Pro Plan Feature`;
+        basicText[i].innerHTML = `<i class="bi bi-lock-fill"></i>&nbsp;&nbsp;Basic Plan Feature`;
+        proTools[i].style.setProperty("opacity", "0.65");
+        basicTools[i].style.setProperty("opacity", "0.65");
       }
     }
 };
