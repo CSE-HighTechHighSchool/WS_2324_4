@@ -29,7 +29,7 @@ const auth = getAuth();
 const db = getDatabase(app);
 
 // Custom alert function
-function customAlert(message) {
+function customAlert(message, redirect = false) {
   // Create overlay
   let overlay = document.createElement('div');
   overlay.className = 'overlay';
@@ -49,10 +49,16 @@ function customAlert(message) {
   // Add event listener to close button and overlay
   closeButton.addEventListener('click', function() {
     document.body.removeChild(overlay);
+    if (redirect) {
+      location = "index.html"; // Redirect browser to index.html
+    }
   });
 
   overlay.addEventListener('click', function() {
     document.body.removeChild(overlay);
+    if (redirect) {
+      location = "index.html"; // Redirect browser to index.html
+    }
   });
 
   // Prevent event propagation to overlay when popup is clicked
@@ -99,7 +105,7 @@ document.getElementById("loginForm").onsubmit = function (e) {
       })
         .then(() => {
           // User signed in successfully
-          customAlert("User signed in successfully!");
+          customAlert('User signed in successfully!', true);
 
           // Get snapshot of all the user info (including the uid) that will be
           // passed to the login function and stored in session or local storage
@@ -132,15 +138,13 @@ function logIn(user) {
 
   // Session storage is temporary (only while active session)
   // Info saved as a string (must convert to JS object to string)
-  // Session stroage will be cleared with a signOut() function in home.js file
+  // Session stroage will be cleared with a signOut() function in index.js file
   if (!keepLoggedIn) {
     sessionStorage.setItem("user", JSON.stringify(user));
-    location = "index.html"; // Redirect browser to home.html
   } else {
     // Local storage is permanent (keep user logged in if browser is closed)
     // Local storage will be cleared with signOut() function)
     localStorage.setItem("keepLoggedIn", "yes");
     localStorage.setItem("user", JSON.stringify(user));
-    location = "index.html"; // Redirect browser to home.html
   }
 }

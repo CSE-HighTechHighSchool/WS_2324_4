@@ -5,7 +5,6 @@ import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/fire
 import { getDatabase, ref, set, update, child, get, remove } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 // Your web app's Firebase configuration
-
 const firebaseConfig = {
   apiKey: "AIzaSyBaZh0qXFMTkaKvX_08-WtJW4luzUFcirM",
   authDomain: "gpa-saver-squared.firebaseapp.com",
@@ -82,10 +81,28 @@ function getUser() {
   }
 }
 
+// Sign-out function that will remove user info from local/session storage
+function signOutUser() {
+  sessionStorage.removeItem("user");  // Clear session storage
+  localStorage.removeItem("user");    // Clear local storage
+  localStorage.removeItem("keepLoggedIn");
+
+  signOut(auth).then(() => {
+    // Sign-out successful
+  })
+  .catch((error) => {
+    customAlert("Error: " + error)
+  })
+
+  window.location = "login.html"
+}
+
 // ----------------------------- Get plan --------------------------
 // Return the user's plan ("basic" or "pro")
 async function getPlan(userID) {
   let plan = null;
+
+  // Provide the path through the nodes to the data
   await get(ref(db, `users/${userID}/accountInfo`))
     .then((snapshot) => {
       if (snapshot.exists()) {
@@ -122,27 +139,6 @@ function makeCurrent(elem) {
   elem.style.pointerEvents = "none";
 }
 
-// Sign-out function that will remove user info from local/session storage
-function signOutUser() {
-  sessionStorage.removeItem("user");  // Clear session storage
-  localStorage.removeItem("user");    // Clear local storage
-  localStorage.removeItem("keepLoggedIn");
-
-  signOut(auth).then(() => {
-    // Sign-out successful
-  })
-  .catch((error) => {
-    customAlert("Error: " + error)
-  })
-
-  window.location = "login.html"
-}
-
-
-
-
-
-
 // -------------------------Update data in database --------------------------
 function updateData(userID, year, month, day, hours) {
   // Must use brackets around variable name to use it as a key
@@ -176,7 +172,7 @@ function getData(userID, year, month, day) {
 
   const dbref = ref(db);  // Firebase parameter for getting data
 
-  // Provide the paht through the nodes to the data
+  // Provide the path through the nodes to the data
   get(child(dbref, `users/${userID}/data/${year}/${month}`))
     .then((snapshot) => {
       if (snapshot.exists() && snapshot.val()[day]) {
@@ -196,7 +192,7 @@ function getData(userID, year, month, day) {
 // ---------------------------Get a month's data set --------------------------
 // Must be an async function because you need to get all the data from FRD
 // before you can process it for a table or graph
-async function getDataSet(userID, year, month) {
+async function getDataSet(userID, year, month, showAlert = true) {
   const days = [];
   const hours = [];
 
@@ -213,28 +209,30 @@ async function getDataSet(userID, year, month) {
           hours.push(parseFloat(child.val()));
         })
       } else {
-        customAlert("No data found.");
+        if (showAlert) {
+          customAlert("No data found.");
+        }
         return;
       }
     })
     .catch((error) => {
-      customAlert("Unsuccessful, error: " + error);
+      if (showAlert) {
+        customAlert("Unsuccessful, error: " + error);
+      }
     });
   
   return [days, hours];
 }
 
-
-
-
-
-
-
-
 //----------------------- Create chart for study hours ------------------------------//
+// Set default font family and color for chart
+Chart.defaults.font.family = 'DM Sans';
+Chart.defaults.color = '#212529';
+
 let monthNames = ["January","February","March","April","May","June","July",
 "August","September","October","November","December"];
 
+// Fill in days and hours data so it can be displayed in chart
 function fillInData(x, y) {
   let newX = [];
   let newY = [];
@@ -297,7 +295,7 @@ function createHoursChart(year, month, x, y) {
             font: {
               size: 12,
             },
-            maxTicksLimit: 20 // limit # of ticksg
+            maxTicksLimit: 20 // limit # of ticks
           },
           min: 0,
           max: 12
@@ -307,7 +305,7 @@ function createHoursChart(year, month, x, y) {
         // Display options
         title: {
           display: true,
-          text: `Hours Studied For Each Day in ${monthNames[month]} ${year}`,
+          text: `Daily Hours Studied in ${monthNames[month]} ${year}`,
           font: {
             size: 24,
           },
@@ -326,10 +324,11 @@ function createHoursChart(year, month, x, y) {
   return studyChart;
 }
 
+// Update chart to reflect edits to the data
 function updateChart(chart, year, month, x, y) {
   let [newX, newY] = fillInData(x, y);
 
-  chart.options.plugins.title.text = `Hours Studied For Each Day in ${monthNames[month]} ${year}`;
+  chart.options.plugins.title.text = `Daily Hours Studied in ${monthNames[month]} ${year}`;
   chart.data.labels = newX;
   chart.data.datasets[0].data = newY;
   chart.update();
@@ -381,7 +380,7 @@ window.onload = async function() {
       loggedInElems[i].style.setProperty("display", "block", "important");
     }
 
-    // Plans
+    // Get button elements for setting plans
     const basicBtn = document.getElementById("basic");
     const proBtn = document.getElementById("pro");
     let plan = await getPlan(currentUser.uid);
@@ -424,16 +423,17 @@ window.onload = async function() {
       basicBtn.style.pointerEvents = "all";
     };
 
-
-
-
-
+    // Get variables so that chart by default displays current month and year upon page load
     let today = new Date();
     let currentMonth = today.getMonth();
     let currentYear = today.getFullYear();
-    const [days, hours] = await getDataSet(currentUser.uid, currentYear, currentMonth);
+
+    // showAlert set to false to avoid alerts upon page load if user has no data for current month
+    const [days, hours] = await getDataSet(currentUser.uid, currentYear, currentMonth, false);
     let studyChart = createHoursChart(currentYear, currentMonth, days, hours);    
 
+    // Get, update, delete hours studied data in FRD
+    // Update data function call
     document.getElementById("set-data").onclick = async function() {
       const userID = currentUser.uid;
       const year = parseInt(document.getElementById("set-year").value);
@@ -441,18 +441,22 @@ window.onload = async function() {
       const day = parseInt(document.getElementById("set-day").value);
       const hours = parseFloat(document.getElementById("set-hours").value);
       updateData(userID, year, month, day, hours);
-      const [daysChart, hoursChart] = await getDataSet(userID, currentYear, currentMonth);
+      const [daysChart, hoursChart] = await getDataSet(userID, currentYear, currentMonth, false);
       updateChart(studyChart, currentYear, currentMonth, daysChart, hoursChart);
     }
 
-    document.getElementById("del-data").onclick = function() {
+    // Delete a single day's data function call
+    document.getElementById("del-data").onclick = async function() {
       const userID = currentUser.uid;
       const year = parseInt(document.getElementById("del-year").value);
       const month = parseInt(document.getElementById("del-month").value);
       const day = parseInt(document.getElementById("del-day").value);
       deleteData(userID, year, month, day);
+      const [daysChart, hoursChart] = await getDataSet(userID, currentYear, currentMonth, false);
+      updateChart(studyChart, currentYear, currentMonth, daysChart, hoursChart);
     }
 
+    // Get a datum function call
     document.getElementById("single-get").onclick = function() {
       const userID = currentUser.uid;
       const year = parseInt(document.getElementById("year").value);
@@ -461,6 +465,7 @@ window.onload = async function() {
       getData(userID, year, month, day);
     }
 
+    // Get a data set function call
     document.getElementById("ds-get").onclick = async function() {
       const userID = currentUser.uid;
       const year = parseInt(document.getElementById("ds-year").value);
@@ -472,13 +477,15 @@ window.onload = async function() {
     }
 
   }
-  else{
+
+  // If viewing homepage while logged out
+  else {
+    // Display elements that are shown when user is logged out
     for (let i = 0; i < loggedOutElems.length; i++) {
       loggedOutElems[i].style.setProperty("display", "block", "important")
     }
 
-
-    // Display elements that are shown when user is logged in
+    // Hide elements that are shown when user is logged in
     for (let i = 0; i < loggedInElems.length; i++) {
       loggedInElems[i].style.setProperty("display", "none", "important");
     }
