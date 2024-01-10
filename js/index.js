@@ -387,16 +387,20 @@ window.onload = async function() {
 
 
     let today = new Date();
-    const [days, hours] = await getDataSet(currentUser.uid, today.getFullYear(), today.getMonth());
-    let studyChart = createHoursChart(today.getFullYear(), today.getMonth(), days, hours);    
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
+    const [days, hours] = await getDataSet(currentUser.uid, currentYear, currentMonth);
+    let studyChart = createHoursChart(currentYear, currentMonth, days, hours);    
 
-    document.getElementById("set-data").onclick = function() {
+    document.getElementById("set-data").onclick = async function() {
       const userID = currentUser.uid;
       const year = parseInt(document.getElementById("set-year").value);
       const month = parseInt(document.getElementById("set-month").value);
       const day = parseInt(document.getElementById("set-day").value);
       const hours = parseFloat(document.getElementById("set-hours").value);
       updateData(userID, year, month, day, hours);
+      const [daysChart, hoursChart] = await getDataSet(userID, currentYear, currentMonth);
+      updateChart(studyChart, currentYear, currentMonth, daysChart, hoursChart);
     }
 
     document.getElementById("del-data").onclick = function() {
@@ -421,6 +425,8 @@ window.onload = async function() {
       const month = parseInt(document.getElementById("ds-month").value);
       const [days, hours] = await getDataSet(userID, year, month);
       updateChart(studyChart, year, month, days, hours);
+      currentMonth = month;
+      currentYear = year;
     }
 
   }
