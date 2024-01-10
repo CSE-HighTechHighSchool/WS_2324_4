@@ -301,7 +301,9 @@ window.onload = async function() {
   const signupLink = document.getElementById("signup-link");
   
   getUser();
-
+  // Get elements that are only shown when user is logged in/out
+  let loggedInElems = document.getElementsByClassName("logged-in");
+  let loggedOutElems = document.getElementsByClassName("logged-out");
   if (currentUser != null) {
 
     // Display name and logout button in the navbar  
@@ -327,14 +329,12 @@ window.onload = async function() {
 
 
     // Get rid of elements that are only shown when user is logged out
-    let loggedOutElems = document.getElementsByClassName("logged-out");
     for (let i = 0; i < loggedOutElems.length; i++) {
       loggedOutElems[i].style.setProperty("display", "none", "important")
     }
 
 
     // Display elements that are shown when user is logged in
-    let loggedInElems = document.getElementsByClassName("logged-in");
     for (let i = 0; i < loggedInElems.length; i++) {
       loggedInElems[i].style.setProperty("display", "block");
     }
@@ -423,5 +423,16 @@ window.onload = async function() {
       updateChart(studyChart, year, month, days, hours);
     }
 
+  }
+  else{
+    for (let i = 0; i < loggedOutElems.length; i++) {
+      loggedOutElems[i].style.setProperty("display", "block")
+    }
+
+
+    // Display elements that are shown when user is logged in
+    for (let i = 0; i < loggedInElems.length; i++) {
+      loggedInElems[i].style.setProperty("display", "none", "important");
+    }
   }
 }
