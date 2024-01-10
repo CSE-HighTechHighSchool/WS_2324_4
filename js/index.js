@@ -27,6 +27,48 @@ const db = getDatabase(app);
 
 let currentUser = null; // Initialize currentUser to null
 
+// Custom alert function
+function customAlert(message) {
+  // Create overlay
+  let overlay = document.createElement('div');
+  overlay.className = 'overlay';
+
+  // Create popup
+  let popup = document.createElement('div');
+  popup.className = 'popup';
+
+  // Add message to popup
+  popup.innerText = message;
+
+  // Create close button
+  let closeButton = document.createElement('button');
+  closeButton.className = 'closeButton btn btn-dark rounded-pill';
+  closeButton.textContent = 'x';
+
+  // Add event listener to close button and overlay
+  closeButton.addEventListener('click', function() {
+    document.body.removeChild(overlay);
+  });
+
+  overlay.addEventListener('click', function() {
+    document.body.removeChild(overlay);
+  });
+
+  // Prevent event propagation to overlay when popup is clicked
+  popup.addEventListener('click', function(event) {
+    event.stopPropagation();
+  });
+
+  // Add close button to popup
+  popup.appendChild(closeButton);
+
+  // Add popup to overlay
+  overlay.appendChild(popup);
+
+  // Add overlay to body
+  document.body.appendChild(overlay);
+}
+
 // ----------------------- Get User object ------------------------------
 function getUser() {
   // Grab value for the 'keep logged in' switch
@@ -49,11 +91,11 @@ async function getPlan(userID) {
       if (snapshot.exists()) {
         plan = snapshot.val()["plan"];
       } else {
-        alert("No data found.");
+        customAlert("No data found.");
       }
     })
     .catch((error) => {
-      alert("Unsuccessful, error: " + error);
+      customAlert("Unsuccessful, error: " + error);
     });
   return plan;
 }
@@ -64,11 +106,11 @@ function updatePlan(userID, plan) {
   // Must use brackets around variable name to use it as a key
   update(ref(db, "users/" + userID + "/accountInfo/"), { plan })
     .then(() => {
-      alert(`Plan successfully updated to ${plan}.`);
+      customAlert(`Plan successfully updated to ${plan}.`);
       return true;
     })
     .catch((error) => {
-      alert("There was an error. Error: " + error);
+      customAlert("There was an error. Error: " + error);
       return false;
     });
 }
@@ -90,7 +132,7 @@ function signOutUser() {
     // Sign-out successful
   })
   .catch((error) => {
-    alert("Error: " + error)
+    customAlert("Error: " + error)
   })
 
   window.location = "login.html"
@@ -108,10 +150,10 @@ function updateData(userID, year, month, day, hours) {
     [day]: hours
   })
     .then(() => {
-      alert("Data updated successfully.");
+      customAlert("Data updated successfully.");
     })
     .catch((error) => {
-      alert("There was an error. Error: " + error)
+      customAlert("There was an error. Error: " + error)
     });
 }
 
@@ -119,10 +161,10 @@ function updateData(userID, year, month, day, hours) {
 function deleteData(userID, year, month, day) {
   remove(ref(db, `users/${userID}/data/${year}/${month}/${day}`))
     .then(() =>{
-      alert('Data removed successfully.')
+      customAlert('Data removed successfully.')
     })
     .catch((error) => {
-      alert('Unsuccessful, error: ' + error)
+      customAlert('Unsuccessful, error: ' + error)
     })
 }
 
@@ -143,11 +185,11 @@ function getData(userID, year, month, day) {
         date.textContent = `${month + 1}/${day}/${year}`;
         result.textContent = snapshot.val()[day] + " hours";
       } else {
-        alert("No data found.");
+        customAlert("No data found.");
       }
     })
     .catch((error) => {
-      alert("Unsuccessful, error: " + error);
+      customAlert("Unsuccessful, error: " + error);
     })
 }
 
@@ -171,12 +213,12 @@ async function getDataSet(userID, year, month) {
           hours.push(parseFloat(child.val()));
         })
       } else {
-        alert("No data found.");
+        customAlert("No data found.");
         return;
       }
     })
     .catch((error) => {
-      alert("Unsuccessful, error: " + error);
+      customAlert("Unsuccessful, error: " + error);
     });
   
   return [days, hours];
@@ -301,7 +343,9 @@ window.onload = async function() {
   const signupLink = document.getElementById("signup-link");
   
   getUser();
-
+  // Get elements that are only shown when user is logged in/out
+  let loggedInElems = document.getElementsByClassName("logged-in");
+  let loggedOutElems = document.getElementsByClassName("logged-out");
   if (currentUser != null) {
 
     // Display name and logout button in the navbar  
@@ -327,14 +371,12 @@ window.onload = async function() {
 
 
     // Get rid of elements that are only shown when user is logged out
-    let loggedOutElems = document.getElementsByClassName("logged-out");
     for (let i = 0; i < loggedOutElems.length; i++) {
       loggedOutElems[i].style.setProperty("display", "none", "important")
     }
 
 
     // Display elements that are shown when user is logged in
-    let loggedInElems = document.getElementsByClassName("logged-in");
     for (let i = 0; i < loggedInElems.length; i++) {
       loggedInElems[i].style.setProperty("display", "block");
     }
@@ -387,16 +429,20 @@ window.onload = async function() {
 
 
     let today = new Date();
-    const [days, hours] = await getDataSet(currentUser.uid, today.getFullYear(), today.getMonth());
-    let studyChart = createHoursChart(today.getFullYear(), today.getMonth(), days, hours);    
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
+    const [days, hours] = await getDataSet(currentUser.uid, currentYear, currentMonth);
+    let studyChart = createHoursChart(currentYear, currentMonth, days, hours);    
 
-    document.getElementById("set-data").onclick = function() {
+    document.getElementById("set-data").onclick = async function() {
       const userID = currentUser.uid;
       const year = parseInt(document.getElementById("set-year").value);
       const month = parseInt(document.getElementById("set-month").value);
       const day = parseInt(document.getElementById("set-day").value);
       const hours = parseFloat(document.getElementById("set-hours").value);
       updateData(userID, year, month, day, hours);
+      const [daysChart, hoursChart] = await getDataSet(userID, currentYear, currentMonth);
+      updateChart(studyChart, currentYear, currentMonth, daysChart, hoursChart);
     }
 
     document.getElementById("del-data").onclick = function() {
@@ -421,7 +467,20 @@ window.onload = async function() {
       const month = parseInt(document.getElementById("ds-month").value);
       const [days, hours] = await getDataSet(userID, year, month);
       updateChart(studyChart, year, month, days, hours);
+      currentMonth = month;
+      currentYear = year;
     }
 
+  }
+  else{
+    for (let i = 0; i < loggedOutElems.length; i++) {
+      loggedOutElems[i].style.setProperty("display", "block")
+    }
+
+
+    // Display elements that are shown when user is logged in
+    for (let i = 0; i < loggedInElems.length; i++) {
+      loggedInElems[i].style.setProperty("display", "none", "important");
+    }
   }
 }

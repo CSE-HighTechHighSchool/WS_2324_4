@@ -32,7 +32,47 @@ const db = getDatabase(app);
 function isEmptyorSpaces(str) {
   return str === null || str.match(/^ *$/) !== null;
 }
+// Custom alert function
+function customAlert(message) {
+  // Create overlay
+  let overlay = document.createElement('div');
+  overlay.className = 'overlay';
 
+  // Create popup
+  let popup = document.createElement('div');
+  popup.className = 'popup';
+
+  // Add message to popup
+  popup.innerText = message;
+
+  // Create close button
+  let closeButton = document.createElement('button');
+  closeButton.className = 'closeButton btn btn-dark rounded-pill';
+  closeButton.textContent = 'x';
+
+  // Add event listener to close button and overlay
+  closeButton.addEventListener('click', function() {
+    document.body.removeChild(overlay);
+  });
+
+  overlay.addEventListener('click', function() {
+    document.body.removeChild(overlay);
+  });
+
+  // Prevent event propagation to overlay when popup is clicked
+  popup.addEventListener('click', function(event) {
+    event.stopPropagation();
+  });
+
+  // Add close button to popup
+  popup.appendChild(closeButton);
+
+  // Add popup to overlay
+  overlay.appendChild(popup);
+
+  // Add overlay to body
+  document.body.appendChild(overlay);
+}
 // ---------------------- Validate Registration Data -----------------------//
 function validation(firstName, lastName, email, password) {
   let fNameRegex = /^[a-zA-Z]+$/;
@@ -45,20 +85,20 @@ function validation(firstName, lastName, email, password) {
     isEmptyorSpaces(email) ||
     isEmptyorSpaces(password)
   ) {
-    alert("Please complete all fields.");
+    customAlert("Please complete all fields.");
     return false;
   }
 
   if (!fNameRegex.test(firstName)) {
-    alert("The first name should only contain letters.");
+    customAlert("The first name should only contain letters.");
     return false;
   }
   if (!lNameRegex.test(lastName)) {
-    alert("The last name should only contain letters.");
+    customAlert("The last name should only contain letters.");
     return false;
   }
   if (!emailRegex.test(email)) {
-    alert("Please enter a valid email. Domain must be ctemc.org.");
+    customAlert("Please enter a valid email. Domain must be ctemc.org.");
     return false;
   }
   return true;
@@ -114,17 +154,17 @@ document.getElementById("signUpForm").onsubmit = function (e) {
       })
         .then(() => {
           // Data saved successfully
-          alert("User created succesfully!");
+          customAlert("User created succesfully!");
           location = "/login.html"; // Redirect to login page
         })
         .catch((error) => {
           // The write failed...
-          alert(error);
+          customAlert(error);
         });
     })
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      alert(errorMessage);
+      customAlert(errorMessage);
     });
 };

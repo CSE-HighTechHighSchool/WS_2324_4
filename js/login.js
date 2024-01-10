@@ -28,6 +28,47 @@ const auth = getAuth();
 // Returns instance of your apps' FRD
 const db = getDatabase(app);
 
+// Custom alert function
+function customAlert(message) {
+  // Create overlay
+  let overlay = document.createElement('div');
+  overlay.className = 'overlay';
+
+  // Create popup
+  let popup = document.createElement('div');
+  popup.className = 'popup';
+
+  // Add message to popup
+  popup.innerText = message;
+
+  // Create close button
+  let closeButton = document.createElement('button');
+  closeButton.className = 'closeButton btn btn-dark rounded-pill';
+  closeButton.textContent = 'x';
+
+  // Add event listener to close button and overlay
+  closeButton.addEventListener('click', function() {
+    document.body.removeChild(overlay);
+  });
+
+  overlay.addEventListener('click', function() {
+    document.body.removeChild(overlay);
+  });
+
+  // Prevent event propagation to overlay when popup is clicked
+  popup.addEventListener('click', function(event) {
+    event.stopPropagation();
+  });
+
+  // Add close button to popup
+  popup.appendChild(closeButton);
+
+  // Add popup to overlay
+  overlay.appendChild(popup);
+
+  // Add overlay to body
+  document.body.appendChild(overlay);
+}
 // ---------------------- Sign-In User ---------------------------------------//
 document.getElementById("loginForm").onsubmit = function (e) {
   // Prevent page from refreshing
@@ -58,7 +99,7 @@ document.getElementById("loginForm").onsubmit = function (e) {
       })
         .then(() => {
           // User signed in successfully
-          alert("User signed in successfully!");
+          customAlert("User signed in successfully!");
 
           // Get snapshot of all the user info (including the uid) that will be
           // passed to the login function and stored in session or local storage
@@ -76,12 +117,12 @@ document.getElementById("loginForm").onsubmit = function (e) {
         })
         .catch((error) => {
           // Sign-in failed...
-          alert(error);
+          customAlert(error);
         });
     })
     .catch((error) => {
       const errorMessage = error.message;
-      alert(errorMessage);
+      customAlert(errorMessage);
     });
 };
 

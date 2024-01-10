@@ -31,6 +31,34 @@ main {
   background-color: var(--bg-tools);
   padding: calc(5rem + var(--navbar-height)) 0 5rem;
 }
+/* Alerts */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.popup {
+  background-color: #ffffffB0;
+  border: 1px #d2d2d2 solid;
+  max-width: 450px;
+  padding: 60px;
+  border-radius: 1.5rem;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
 
 /* ----------------------- Navigation bar ----------------------- */
 
