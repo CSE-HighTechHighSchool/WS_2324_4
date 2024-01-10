@@ -430,6 +430,7 @@ footer li + li {
 }
 
 /* ----------------------- Tools page -----------------------*/
+/* Default styling for plan status text on tool cards */
 .basic-text, .pro-text {
   color: rgba(160, 160, 160, 0.85);
   font-weight: bold;
