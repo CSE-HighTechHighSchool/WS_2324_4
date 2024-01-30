@@ -366,7 +366,7 @@ window.onload = async function() {
 
 
     // Welcome message in Hero
-    document.getElementById("welcome").textContent = `Welcome back ${currentUser.firstname}!`;
+    document.getElementById("welcome").textContent = `Welcome back, ${currentUser.firstname}!`;
 
 
     // Get rid of elements that are only shown when user is logged out
